@@ -58,8 +58,6 @@ export interface BusinessAdminInterface {
 }
 
 export interface LinkBodyDto {
-    authorId: string;
     entityId: string;
     entityName: string;
-    authorName?: string;
 }
