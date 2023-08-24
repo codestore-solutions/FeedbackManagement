@@ -13,24 +13,26 @@ export const validateAnswer = (section: any) => {
 
     const transformedErrors: Record<string, string> = {};
 
-    const sectionId = section.id;
-    const questions = section.questions;
-
-    for (const question_ of questions) {
-        const { id, answerFormat, required, answer } = question_;
-
-        if (required && (answer === null || answer.length === 0)) {
-            transformedErrors[`${sectionId}_${id}`] = errorMessages.required;
-            return transformedErrors;
-        }
-
-        if (answer !== null) {
-
-            if (answerFormat === 'textarea' && !textareaSchema(answer)) {
+    const sectionId = section?.id;
+    const questions = section?.questions;
+    if(questions){
+        for (const question_ of questions) {
+            const { id, answerFormat, required, answer } = question_;
+    
+            if (required && (answer === null || answer.length === 0)) {
                 transformedErrors[`${sectionId}_${id}`] = errorMessages.required;
                 return transformedErrors;
             }
+    
+            if (answer !== null) {
+    
+                if (answerFormat === 'textarea' && !textareaSchema(answer)) {
+                    transformedErrors[`${sectionId}_${id}`] = errorMessages.required;
+                    return transformedErrors;
+                }
+            }
         }
+
     }
 
     return null;

@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 interface DecodedToken {
     templateId: string;
     linkBodyDto: {
-        authorId: string;
         entityId: string;
         entityName: string;
-        authorName?: string;
     };
     iat: number;
     exp: number;

@@ -6,6 +6,7 @@ import MultilineInput from '../input/multiline-input';
 import RadioInput from '../input/radio-input';
 import FileInput from '../input/file-input';
 import { AnswerTypeInterface, ErrorProp, OnChangeHandlerFn } from '@/pages/feedback-form/[feedback]';
+import UserForm from '../UserForm/UserForm';
 
 interface AnswerFormat {
     type: string;
@@ -34,6 +35,7 @@ export default function CreateAnswerFormat({ sectionId, questionId, question,
         errors: ErrorProp;
         setErrors: Dispatch<React.SetStateAction<ErrorProp>>
     }) {
+    const addUserData = () =>{};
     const { type, options, required, upperBound } = answerFormat;
     const error = errors[`${sectionId}_${questionId}`]
 
