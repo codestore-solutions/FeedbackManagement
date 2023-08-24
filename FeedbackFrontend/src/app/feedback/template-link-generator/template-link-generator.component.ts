@@ -22,8 +22,8 @@ export class TemplateLinkGeneratorComponent implements OnInit{
   generatedLink!:string;
 
   templateLinkGeneratorForm = new FormGroup({
-    authorId: new FormControl("", [Validators.required]),
-    authorName: new FormControl("", [Validators.required]),
+    // authorId: new FormControl("", [Validators.required]),
+    // authorName: new FormControl("", [Validators.required]),
     entityId: new FormControl("", [Validators.required]),
     entityName: new FormControl("", [Validators.required])
   })
@@ -47,14 +47,10 @@ export class TemplateLinkGeneratorComponent implements OnInit{
 
   generateLink():void{
     let payload:LinkGenerationPayload = {
-      authorId: this.templateLinkGeneratorForm.value.authorId!,
-      authorName: this.templateLinkGeneratorForm.value.authorName!,
       entityId: this.templateLinkGeneratorForm.value.entityId!,
       entityName: this.templateLinkGeneratorForm.value.entityName!
     }
     if(
-      this.templateLinkGeneratorForm.value.authorId?.trim()=="" ||
-      this.templateLinkGeneratorForm.value.authorName?.trim()=="" ||
       this.templateLinkGeneratorForm.value.entityId?.trim()=="" ||
       this.templateLinkGeneratorForm.value.entityName?.trim()==""
       ){

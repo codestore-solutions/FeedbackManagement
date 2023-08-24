@@ -1,5 +1,5 @@
 mat-card{
-    width: 60vw;;
+    width: 40vw;
 }
 .header{
     font-size: 1.25em;
@@ -13,8 +13,7 @@ mat-card{
     margin-bottom: 1em;
 }
 mat-form-field{
-    margin-inline: 2.5%;
-    width: 45%;
+    width: 100%;
 }
 img{
     height: 1em;
@@ -27,10 +26,10 @@ img{
 }
 .link-holder{
     height: 2em;
-    width: 95%;
+    width: 90%;
 }
 @media screen and (max-width:850px) {
     mat-card{
-        width: 95vw;
+        width: 100vw;
     }
 }

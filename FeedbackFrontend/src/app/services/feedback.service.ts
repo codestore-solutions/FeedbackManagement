@@ -4,11 +4,6 @@ import { CustomFeedbackFormBodySchema, SingleFeedbackTemplateBody, CategoryBased
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export interface DateRange {
-  start:string;
-  end:string;
-}
-
 @Injectable({
   providedIn: 'root'
 })

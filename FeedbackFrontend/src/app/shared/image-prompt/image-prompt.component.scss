@@ -1,16 +1,15 @@
 .prompt{
-    width: 50vw;
-    height: 85vh;
     padding: 0;
     overflow: hidden;
 }
 img{
-    width: 100%;
-    height: 100%;
+    width: 50vw;
+    height: 85vh;
+    object-fit: contain;
     margin: 0;
 }
 @media screen and (max-width:850px) {
-    .prompt{
+    img{
         width: 90vw;
         height: 50vh;
     }

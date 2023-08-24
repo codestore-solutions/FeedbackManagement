@@ -144,10 +144,8 @@ export interface DetailedFeedbackResponse{
 }
 
 export interface LinkGenerationPayload{
-  authorId: string;
   entityId: string;
   entityName: string;
-  authorName: string;
 }
 
 export interface GeneratedLinkResponse{

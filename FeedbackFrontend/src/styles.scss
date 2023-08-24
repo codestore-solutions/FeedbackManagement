@@ -1,5 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+$app-primary-color: #304FFE;
 
 html, body{
     height: 100%;
@@ -15,10 +16,10 @@ body{
     color: rgb(100, 100, 100);
 }
 .primary-background{
-    background-color: #304FFE !important;
+    background-color: $app-primary-color !important;
 }
 .primary-color{
-    color: #304FFE !important;
+    color: $app-primary-color !important;
 }
 .warn-color{
     color: red;
