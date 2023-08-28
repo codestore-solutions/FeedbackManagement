@@ -42,4 +42,8 @@ export class ExpandedTemplateViewComponent implements OnInit {
     })
   }
 
+  openGeneratedLinksDetailDialog():void{
+    
+  }
+
 }

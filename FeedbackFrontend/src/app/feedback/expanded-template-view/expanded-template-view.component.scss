@@ -1,11 +1,14 @@
 .head{
     margin-block: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.actions{
+    margin-inline: 0.25em;
 }
 .template-reference{
     font-size: 1.25em;
-}
-.fr{
-    float: right;
 }
 .selected{
     background-color: white !important;
@@ -34,4 +37,17 @@
     overflow-y: scroll;
     padding: 2em 4em;
     color: rgb(80, 80, 80);
+}
+
+@media screen and (max-width:500px) {
+    .left-box{
+        width:40%;
+    }
+    .left-box-option{
+        padding: 0.5em;
+    }
+    .right-box{
+        width: 60%;
+        padding: 1em;
+    }
 }

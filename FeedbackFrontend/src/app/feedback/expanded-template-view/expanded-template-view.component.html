@@ -3,9 +3,12 @@
         {{templateName}}
         <app-active-badge *ngIf="template?.response?.active"></app-active-badge>
     </span>
-    <span class="fr" *ngIf="!template?.response?.active">
-        <button mat-flat-button color="primary" (click)="setCurrentTemplateActive()">
-            Use this template
+    <span *ngIf="!template?.response?.active">
+        <button mat-flat-button color="primary" (click)="openGeneratedLinksDetailDialog()" class="actions">
+            View generated links
+        </button>
+        <button mat-flat-button color="primary" (click)="setCurrentTemplateActive()" class="actions">
+            Set as active
         </button>
     </span>
 </div>
