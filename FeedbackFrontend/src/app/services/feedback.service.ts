@@ -62,5 +62,10 @@ export class FeedbackService {
   getGeneratedTemplateLink(serviceId:string, businessAdminId:string, data:LinkGenerationPayload):Observable<GeneratedLinkResponse>{
     return this._http.post<GeneratedLinkResponse>(`${this.baseURL}businessAdmin/createLink/${serviceId}/${businessAdminId}`, data)
   }
+
+  //gets all the generated feedback links for a particular template id
+  getAllTemplateSpecificGeneratedLinks(){
+    
+  }
   
 }

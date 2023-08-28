@@ -1,0 +1,24 @@
+.table-wrapper{
+    max-height: 70vh;
+    overflow: scroll;
+}
+.generated-link-table{
+    border-radius: 20px;
+    overflow: hidden;
+    margin:0 0.5em 0.5em 0.5em;
+    font-size: 0.9em;
+}
+th {
+    background-color: #F1F3F6 !important;
+}
+.link-wrapper{
+    display: flex;
+    align-items: center;
+}
+.copy-img{
+    height: 1em;
+    margin-inline: 0.25em;
+}
+.action-img{
+    height: 1.5em;
+}

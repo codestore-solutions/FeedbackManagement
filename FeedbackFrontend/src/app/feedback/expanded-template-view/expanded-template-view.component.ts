@@ -3,6 +3,8 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 import { ActivatedRoute } from '@angular/router';
 import { SingleFeedbackTemplateBody } from 'src/app/interfaces/feedback';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { GeneratedLinksTableComponent } from '../generated-links-table/generated-links-table.component';
 
 @Component({
   selector: 'app-expanded-template-view',
@@ -19,7 +21,9 @@ export class ExpandedTemplateViewComponent implements OnInit {
   constructor(
     private _feedbackService: FeedbackService,
     private _activatedRoute: ActivatedRoute,
-    private _snackbar: MatSnackBar){}
+    private _snackbar: MatSnackBar,
+    private _dialog: MatDialog
+  ){}
 
   ngOnInit(): void {
     this.categoryId = this._activatedRoute.snapshot.paramMap.get("categoryId")!;
@@ -38,12 +42,14 @@ export class ExpandedTemplateViewComponent implements OnInit {
   setCurrentTemplateActive():void{
     this._feedbackService.setTemplateAsActive(this.categoryId, this.templateId).subscribe((res)=>{
       this._snackbar.open(`${this.templateName} has been set as active`, "OK", {duration:2500})
-      window.location.reload();
+      setTimeout(()=>{
+        window.location.reload();
+      }, 2000);
     })
   }
 
   openGeneratedLinksDetailDialog():void{
-    
+    this._dialog.open(GeneratedLinksTableComponent);
   }
 
 }
