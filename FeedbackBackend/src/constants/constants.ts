@@ -3,7 +3,7 @@ export const auth_constant = {
     secret: "safmdknfsdDKFKN122sdnmkfnsJDKNF23234Sssds"
 }
 
-export const feedbackFormUrl = 'https://feedback-form-dev-app.azurewebsites.net/feedback-form'
+export const feedbackFormUrl = 'https://feedback-form-dev.azurewebsites.net/feedback-form'
 
 export enum TemplateType {
     CUSTOM = 1,
