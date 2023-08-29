@@ -40,10 +40,12 @@
                                 {{qa.answer?qa.answer:"N/A"}}
                             </div>
                             <div class="bold" *ngIf="qa.answerFormat.type=='numberrating'">
-                                {{qa.answer?qa.answer:"N/A"}}
+                                <app-number-rating [receivedNumberRating]="qa.answer" *ngIf="qa.answer"></app-number-rating>
+                                <span *ngIf="!qa.answer">N/A</span>
                             </div>
                             <div class="bold" *ngIf="qa.answerFormat.type=='emojirating'">
-                                {{qa.answer?qa.answer:"N/A"}}
+                                <app-emoji-rating [receivedEmojiRating]="qa.answer" *ngIf="qa.answer"></app-emoji-rating>
+                                <span *ngIf="!qa.answer">N/A</span>
                             </div>
                             <div class="bold" *ngIf="qa.answerFormat.type=='textarea'">
                                 {{qa.answer?qa.answer:"N/A"}}

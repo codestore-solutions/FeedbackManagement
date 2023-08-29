@@ -26,81 +26,10 @@ export class GeneratedLinksTableComponent implements OnInit{
       entityName:"Speaker X-Three",
       link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
       date:"26-08-2023"
-    },
-    {
-      entityId:"ID-1",
-      entityName:"Headphone X-One",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"23-08-2023"
-    },
-    {
-      entityId:"ID-2",
-      entityName:"Watch X-Two",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"25-08-2023"
-    },
-    {
-      entityId:"ID-3",
-      entityName:"Speaker X-Three",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"26-08-2023"
-    },
-    {
-      entityId:"ID-1",
-      entityName:"Headphone X-One",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"23-08-2023"
-    },
-    {
-      entityId:"ID-2",
-      entityName:"Watch X-Two",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"25-08-2023"
-    },
-    {
-      entityId:"ID-3",
-      entityName:"Speaker X-Three",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"26-08-2023"
-    },
-    {
-      entityId:"ID-1",
-      entityName:"Headphone X-One",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"23-08-2023"
-    },
-    {
-      entityId:"ID-2",
-      entityName:"Watch X-Two",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"25-08-2023"
-    },
-    {
-      entityId:"ID-3",
-      entityName:"Speaker X-Three",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"26-08-2023"
-    },
-    {
-      entityId:"ID-1",
-      entityName:"Headphone X-One",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"23-08-2023"
-    },
-    {
-      entityId:"ID-2",
-      entityName:"Watch X-Two",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"25-08-2023"
-    },
-    {
-      entityId:"ID-3",
-      entityName:"Speaker X-Three",
-      link:"example.com/gwte7jhuyd7yoqi8iu3hjwlkuwiuyeuyqidwhd2iy7tyt3tygqjhjknakoqdqiyuytiqoyriqehnzhjg27jdhiugkdlqgekqgwshkjhaehjdhiueykwnzkjsahuduekjsdihejhlqyiqyytzji",
-      date:"26-08-2023"
     }
   ]
 
+  generatedFeedbackLinks:any;
   dataSource!:MatTableDataSource<{entityId:string; entityName:string; link:string; date:string;}>;
   columnsToDisplay:string[] = ["serial", "entityId", "entityName", "link", "date"];
 

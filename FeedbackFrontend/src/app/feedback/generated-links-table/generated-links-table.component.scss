@@ -1,11 +1,12 @@
+.heading-wrapper{
+    text-align: center;
+    font-size: 1.25em;
+    padding-block: 0.5em;
+}
 .table-wrapper{
     max-height: 70vh;
-    overflow: scroll;
 }
 .generated-link-table{
-    border-radius: 20px;
-    overflow: hidden;
-    margin:0 0.5em 0.5em 0.5em;
     font-size: 0.9em;
 }
 th {
@@ -21,4 +22,9 @@ th {
 }
 .action-img{
     height: 1.5em;
+}
+.action-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

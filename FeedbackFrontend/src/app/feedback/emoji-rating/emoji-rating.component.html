@@ -1,29 +1,25 @@
 <div class="wrapper">
-    <div class="emoji-wrapper">
+    <div class="emoji-wrapper" [ngClass]="{'main':receivedEmojiRating===1}">
         <img src="../../../assets/terrible-emoji.svg" alt="terrible">
         <br>
         <span>Terrible</span>
     </div>
-
-    <div class="emoji-wrapper">
+    <div class="emoji-wrapper" [ngClass]="{'main':receivedEmojiRating===2}">
         <img src="../../../assets/bad-emoji.svg" alt="bad">
         <br>
         <span>Bad</span>
     </div>
-
-    <div class="emoji-wrapper">
+    <div class="emoji-wrapper" [ngClass]="{'main':receivedEmojiRating===3}">
         <img src="../../../assets/okay-emoji.svg" alt="okay">
         <br>
         <span>Average</span>
     </div>
-
-    <div class="emoji-wrapper main">
+    <div class="emoji-wrapper" [ngClass]="{'main':receivedEmojiRating===4}">
         <img src="../../../assets/good-emoji.svg" alt="good">
         <br>
         <span>Good</span>
     </div>
-
-    <div class="emoji-wrapper">
+    <div class="emoji-wrapper" [ngClass]="{'main':receivedEmojiRating===5}">
         <img src="../../../assets/amazing-emoji.svg" alt="amazing">
         <br>
         <span>Amazing</span>
