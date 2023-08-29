@@ -50,7 +50,7 @@
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
         </table>
     </div>
-    <div *ngIf="!data">
+    <div *ngIf="!generatedFeedbackLinks">
         <app-no-data-available></app-no-data-available>
     </div>
 </div>
