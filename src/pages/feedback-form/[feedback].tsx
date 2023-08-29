@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Tabination from "@/components/Tabination";
 import useJwtDecode from "@/hooks/useJwtDecode";
@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import { notification } from "antd";
 import type { NotificationPlacement } from "antd/es/notification/interface";
 import { urls } from "@/assets/contants";
+import CustomModal from "@/components/CustomModal/CustomModal";
+import UserForm from "@/components/UserForm/UserForm";
 
 export interface FeedbackFormBodySchema {
   businessCategory?: number;
@@ -67,6 +69,7 @@ export default function FeedbackForm() {
   const { query } = router;
   const token = query.feedback as string;
   const decodedToken = useJwtDecode(token);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [answer, setAnswer] = useState<Answer>({ sections: [] });
   const [template, setTemplate] = useState<FeedbackFormBodySchema | null>();
   const [isMobile, setIsMobile] = useState(false);
@@ -75,22 +78,15 @@ export default function FeedbackForm() {
   const [errors, setErrors] = useState<ErrorProp>({});
   const [api, contextHolder] = notification.useNotification();
 
-  const userSection = {
-    id: sectionLen,
-    title: "User Details",
-    order: 0,
-    questions: [
-      {
-        id: 1,
-        question: "Enter Your Name",
-        answerFormat: {
-          type: "input",
-          required: true,
-        },
-      },
-    ],
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => {
+    setIsOpen(false);
   };
+  
 
+  // const user = {
+  //    name: 'Aman Shah'
+  // }
   const openNotification = (
     placement: NotificationPlacement,
     response: { title: string; error: string },
@@ -108,10 +104,12 @@ export default function FeedbackForm() {
   };
 
   useEffect(() => {
+    console.log('useffect2')
     handleWindowSizeChange();
   }, []);
 
   useEffect(() => {
+    // localStorage.setItem('user', JSON.stringify(user));
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
@@ -136,9 +134,10 @@ export default function FeedbackForm() {
       const body = {
         ...decodedToken?.linkBodyDto,
         authorId: uuidv4(),
-        authorName: userData?.name,
+        authorName: userData,
         sectionResponse: data,
       };
+      console.log('body', body)
       const response = await fetch(`${urls.get}/${templateId}`, {
         method: "POST",
         headers: {
@@ -166,20 +165,19 @@ export default function FeedbackForm() {
           "success"
         );
       }
+      closeModal();
     } catch (error) {
       throw error;
     }
   };
 
   useEffect(() => {
+    console.log('Useffect');
     (async () => {
       if (decodedToken) {
         try {
           const templateObj = await fetchTemplateAPI(decodedToken.templateId);
-          const len = templateObj?.sections?.length + 1;
-          setSectionLen(len);
-          const updatedSections = [...templateObj?.sections, userSection];
-          setTemplate({ ...templateObj, sections: updatedSections });
+          setTemplate(templateObj);
           const answerBody = transformTemplateToAnswer(templateObj);
           setAnswer(answerBody);
         } catch (error) {
@@ -187,7 +185,7 @@ export default function FeedbackForm() {
         }
       }
     })();
-  }, [decodedToken, fetchTemplateAPI, sectionLen]);
+  }, [decodedToken, fetchTemplateAPI]);
 
   const onChangeHandler = (
     sectionId: number,
@@ -233,6 +231,12 @@ export default function FeedbackForm() {
     return true;
   };
 
+  const handleModal = () =>{
+    if (!validationHandler()) return;
+    if (!decodedToken) return false;
+    else openModal();
+  }
+
   const submitHandler = async () => {
     setLoader(true);
     if (!validationHandler()) return;
@@ -243,10 +247,10 @@ export default function FeedbackForm() {
   };
 
   const [activeTabKey, setActiveTabkey] = useState<number>(1);
-  const [userData, setUserData] = useState<{ name: string }>();
+  const [userData, setUserData] = useState<string>();
 
-  const addUserData = (data: { name: string } | undefined) => {
-    setUserData(data);
+  const addUserData = (name: string) => {
+    setUserData(name);
   };
   const onNextTabHandler = () => {
     console.log(activeTabKey);
@@ -279,7 +283,6 @@ export default function FeedbackForm() {
             setErrors={setErrors}
             onChange={onChangeHandler}
             activeTabKey={activeTabKey}
-            addUserData={addUserData}
           />
           <div className="flex justify-end w-full mt-4 p-4 sm:p-0">
             {template.sections.length === activeTabKey ? (
@@ -297,7 +300,7 @@ export default function FeedbackForm() {
                   type="primary"
                   className="bg-[#4096ff]"
                   loading={loader}
-                  onClick={submitHandler}
+                  onClick={handleModal}
                 >
                   Submit
                 </Button>
@@ -324,6 +327,17 @@ export default function FeedbackForm() {
               </>
             )}
           </div>
+          <CustomModal
+            isOpen={isOpen}
+            onClose={closeModal}
+            width={350}
+            component={
+              <UserForm
+                addUserData={addUserData}
+                submitHandler={submitHandler}
+              />
+            }
+          />
         </>
       )}
       {contextHolder}

@@ -19,7 +19,7 @@ const getBase64 = (file: RcFile): Promise<string> =>
     });
 
 export default function FileInput({ onChange }: FileInputProps) {
-
+    const [len, setLen] = useState<number>(0);
     const [files, setFiles] = useState<UploadFile[]>([])
     const [urls, setUrls] = useState<string[]>([])
 
@@ -45,19 +45,22 @@ export default function FileInput({ onChange }: FileInputProps) {
 
         if (file.status === "done" && file.response && file.response) {
             url = file.response.response.url;
-            setUrls((prevUrls) => [...prevUrls, url]);
+            const prevUrl =  [...urls, url]
+            setUrls(prevUrl);
+            onChange(prevUrl);
         } else if (file.status === "removed" && file.response && file.response.response.url) {
             const removedUrl = file.response.response.url;
-            setUrls((prevUrls) => prevUrls.filter((item) => item !== removedUrl));
+            const prevUrl =  urls.filter((item) => item !== removedUrl)
+            setUrls(prevUrl);
+            onChange(prevUrl);
         }
 
         setFiles(newFileList);
     };
+    
 
-    useEffect(() => {
-        onChange(urls);
-    }, [urls, onChange])
 
+    
     const uploadButton = (
         <div>
             <PlusOutlined />
@@ -67,6 +70,7 @@ export default function FileInput({ onChange }: FileInputProps) {
 
     return (
         <>
+       
             <Upload
                 action="https://feedbackbackend-dev.azurewebsites.net/api/v1/templateResponse/uploadImages"
                 accept='image/jpeg, image/png, image/gif'
@@ -75,7 +79,7 @@ export default function FileInput({ onChange }: FileInputProps) {
                 fileList={files}
                 onPreview={handlePreview}
                 onChange={handleChange}>
-                {files.length >= 8 ? null : uploadButton}
+                {files.length >= 5 ? null : uploadButton}
             </Upload>
             <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                 <Image alt="example" style={{ width: '100%' }} src={previewImage} />

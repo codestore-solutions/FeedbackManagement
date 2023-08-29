@@ -18,7 +18,6 @@ interface TabinationProps {
   activeTabKey: number;
   errors: ErrorProp;
   setErrors: Dispatch<React.SetStateAction<ErrorProp>>;
-  addUserData: (data:any) => void;
 }
 
 export default function Tabination({
@@ -29,10 +28,7 @@ export default function Tabination({
   activeTabKey,
   errors,
   setErrors,
-  addUserData,
 }: TabinationProps) {
-  
-
   return (
     <Tabs
       activeKey={`${activeTabKey}`}
@@ -43,18 +39,15 @@ export default function Tabination({
         return {
           label: item.title,
           key: `${item.id}`,
-          children:
-            item?.id !== 4 ? (
-              <QuestionFormat
-                setErrors={setErrors}
-                errors={errors}
-                sectionId={item.id}
-                questions={item.questions}
-                onChange={onChange}
-              />
-            ) : (
-              <UserForm  addUserData={addUserData}  />
-            ),
+          children: (
+            <QuestionFormat
+              setErrors={setErrors}
+              errors={errors}
+              sectionId={item.id}
+              questions={item.questions}
+              onChange={onChange}
+            />
+          ),
         };
       })}
     />

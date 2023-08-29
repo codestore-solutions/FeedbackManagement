@@ -7,6 +7,7 @@ import RadioInput from '../input/radio-input';
 import FileInput from '../input/file-input';
 import { AnswerTypeInterface, ErrorProp, OnChangeHandlerFn } from '@/pages/feedback-form/[feedback]';
 import UserForm from '../UserForm/UserForm';
+import NumberRating from '../input/number-rating';
 
 interface AnswerFormat {
     type: string;
@@ -48,6 +49,7 @@ export default function CreateAnswerFormat({ sectionId, questionId, question,
     }
 
     switch (type) {
+       
         case "checkbox":
             return <CheckboxInput
                 error={error}
@@ -118,7 +120,20 @@ export default function CreateAnswerFormat({ sectionId, questionId, question,
                     {error && <p className='text-red-600 ml-1 mt-2'>{error}</p>}
                 </>
             );
+        case "numberrating":
+             return (
+                  <>
+                  <Question
+                        error={error}
+                        question={question} required={required} />
+                        <NumberRating
+                        count={upperBound ?? 5}
+                        onChange={onChangeHandler} />
+                    {error && <p className='text-red-600 ml-1 mt-2'>{error}</p>}
+                  </>
+             )
         default:
+           
             return null;
     }
 }
