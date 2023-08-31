@@ -104,12 +104,11 @@ export default function FeedbackForm() {
   };
 
   useEffect(() => {
-    console.log('useffect2')
+  
     handleWindowSizeChange();
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem('user', JSON.stringify(user));
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
@@ -172,7 +171,7 @@ export default function FeedbackForm() {
   };
 
   useEffect(() => {
-    console.log('Useffect');
+   
     (async () => {
       if (decodedToken) {
         try {

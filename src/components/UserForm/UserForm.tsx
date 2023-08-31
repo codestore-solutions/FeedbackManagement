@@ -21,22 +21,22 @@ const UserForm: React.FC<UserFormProps> = ({ addUserData, submitHandler }) => {
     submitHandler();
   };
 
-  // useEffect(() => {
-  //   const userString = localStorage.getItem("user");
-  //   if (userString) {
-  //     try {
-  //       const userObject = JSON.parse(userString);
-  //       if (userObject && userObject.name) {
-  //         form.setFieldsValue({ name: userObject.name });
-  //         addUserData(userObject.name);
-  //         setInputEmpty(false);
-  //         setIsEditable(false);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error parsing user data from local storage:", error);
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    const userString = localStorage.getItem("name");
+    if (userString) {
+      try {
+        const userObject = JSON.parse(userString);
+        if (userObject) {
+          form.setFieldsValue({ name: userObject });
+          addUserData(userObject);
+          setInputEmpty(false);
+          setIsEditable(false);
+        }
+      } catch (error) {
+        console.error("Error parsing user data from local storage:", error);
+      }
+    }
+  }, [form, addUserData]);
 
   return (
    
