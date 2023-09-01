@@ -164,78 +164,91 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
   }
 
   saveCustomTemplate(): void {
+    if(this.isGeneratedTemplateValid()){
+      this._feedbackService.createCustomTemplate(this.custom).subscribe((res) => {
+        this._snackBar.open("Template successfully created.", "OK", {duration: 2500});
+        setTimeout(()=>{
+          this._router.navigate(["admin/dashboard/feedback-templates"])
+        }, 2500);
+      }, (err)=>{
+        this._snackBar.open("Failed to create the template.", "OK", {duration: 2500});
+      })
+    }
+  }
+
+  isGeneratedTemplateValid():boolean{
     if(this.custom.feedbackFormName.trim() === ""){
       alert(`Template Name is a mandatory field.`)
-      return
+      return false
     }
     for(let section of this.custom.sections){
       if(section.title.trim()===""){
         alert(`Section Names are mandatory fields.`)
-        return
+        return false
       }
       for(let qa of section.questions){
         if(qa.question.trim() === ""){
           alert(`Empty question fields are not allowed in section - ${section.title}`)
-          return
+          return false
         }
         if(qa.answerFormat.type === ""){
           alert(`Empty answer fields are not allowed in section - ${section.title}`)
-          return
+          return false
         }
         if(qa.answerFormat.type==="radio"){
           if(qa.answerFormat.options?.length===0){
             alert(`You must provide options for radio based answer types in section - ${section.title}`)
-            return
+            return false
           }else{
             if(qa.answerFormat.options?.length!<2 && qa.answerFormat.options?.length!>10){
               alert(`Allowed number of options for a radio question type is between 2 and 10 in section - ${section.title}`)
-              return
+              return false
             }
             for(let opt of qa.answerFormat.options!){
               if(opt === ""){
                 alert(`You can't have an empty option for a radio answer type in section - ${section.title}`)
-                return
+                return false
+              }
+              if(opt.length>30){
+                alert(`Length of any particular option for radio answer type can not be more than 30 - ${section.title}`)
+                return false
               }
             }
             let duplicates = qa.answerFormat.options?.filter((option:string, index:number)=>qa.answerFormat.options?.indexOf(option)!==index)
             if(duplicates?.length){
-              alert(`You can't have duplicate options for a radio question type in section - ${section.title}`)
-              return
+              alert(`You can't have duplicate options for a radio answer type in section - ${section.title}`)
+              return false
             }
-          }  
+          }
         }
         if(qa.answerFormat.type==="checkbox"){
           if(qa.answerFormat.options?.length===0){
             alert(`You must provide options for checkbox based answer types in section - ${section.title}`)
-            return
+            return false
           }else{
             if(qa.answerFormat.options?.length!<2 && qa.answerFormat.options?.length!>10){
               alert(`Allowed number of options for a checkbox question type is between 2 and 10 in section - ${section.title}`)
-              return
+              return false
             }
             for(let opt of qa.answerFormat.options!){
               if(opt === ""){
                 alert(`You can't have an empty option for a checkbox answer type in section - ${section.title}`)
-                return
+                return false
+              }
+              if(opt.length>30){
+                alert(`Length of any particular option for checkbox answer type can not be more than 30 - ${section.title}`)
+                return false
               }
             }
             let duplicates = qa.answerFormat.options?.filter((option:string, index:number)=>qa.answerFormat.options?.indexOf(option)!==index)
             if(duplicates?.length){
-              alert(`You can't have duplicate options for a radio question type in section - ${section.title}`)
-              return
+              alert(`You can't have duplicate options for a checkbox answer type in section - ${section.title}`)
+              return false
             }           
           }  
         }
       }
     }
-
-    this._feedbackService.createCustomTemplate(this.custom).subscribe((res) => {
-      this._snackBar.open("Template successfully created.", "OK", {duration: 2500});
-      setTimeout(()=>{
-        this._router.navigate(["admin/dashboard/feedback-templates"])
-      }, 2500);
-    }, (err)=>{
-      this._snackBar.open("Failed to create the template.", "OK", {duration: 2500});
-    })
+    return true
   }
 }
