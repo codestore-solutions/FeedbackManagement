@@ -210,7 +210,7 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
                 return false
               }
               if(opt.length>30){
-                alert(`Length of any particular option for radio answer type can not be more than 30 - ${section.title}`)
+                alert(`Length of any particular option for radio answer type can't be more than 30 characters in section - ${section.title}`)
                 return false
               }
             }
@@ -236,7 +236,7 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
                 return false
               }
               if(opt.length>30){
-                alert(`Length of any particular option for checkbox answer type can not be more than 30 - ${section.title}`)
+                alert(`Length of any particular option for checkbox answer type can't be more than 30 characters in section - ${section.title}`)
                 return false
               }
             }
