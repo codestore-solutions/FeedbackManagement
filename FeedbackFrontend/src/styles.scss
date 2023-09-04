@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+@use '@angular/material' as mat;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 $app-primary-color: #304FFE;
 
 html, body{
@@ -26,4 +27,10 @@ body{
 }
 .text-white{
     color: white;
+}
+.dense-1 {
+  @include mat.all-component-densities(-1);
+}
+.dense-2 {
+  @include mat.all-component-densities(-2);
 }

@@ -65,7 +65,7 @@ export class FeedbackService {
 
   //gets all the generated feedback links for a particular template id
   getAllTemplateSpecificGeneratedLinks(){
-    
+    this._http.get(`${this.baseURL}`)
   }
   
 }

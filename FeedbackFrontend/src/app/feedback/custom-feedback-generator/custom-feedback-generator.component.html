@@ -1,91 +1,114 @@
 <h3>Create Custom Template</h3>
 
 <div class="main-wrapper">
+
     <div class="top-section">
         <div class="bold bm5">Template Name</div>
-        <mat-form-field appearance="outline">
-            <input type="text" matInput [(ngModel)]="custom.feedbackFormName" required="true">
-            <mat-error><small>It is a mandatory field.</small></mat-error>
-        </mat-form-field>
+        <div class="dense-2">
+            <mat-form-field appearance="outline">
+                <input type="text" matInput [(ngModel)]="custom.feedbackFormName" required="true">
+            </mat-form-field>
+        </div>
     </div>
 
     <div class="mid-section">
         <div *ngFor="let section of custom.sections; let outer_i = index;">
             <mat-accordion class="example-headers-align" multi>
-
                 <mat-expansion-panel [expanded]="true">
 
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <span class="bold">{{section.title}}</span>
+                            <span class="bold">
+                                {{section.title}}
+                            </span>
                         </mat-panel-title>
                         <mat-panel-description>
                             <span></span>
-                            <button mat-icon-button (click)="deleteSection(outer_i)" color="warn">
+                            <button *ngIf="custom.sections.length>1" mat-icon-button (click)="deleteSection(outer_i)"
+                                color="warn">
                                 <img src="../../../assets/delete-red.svg" alt="delete">
                             </button>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Section Name</mat-label>
-                        <input type="text" matInput [(ngModel)]="section.title">
-                    </mat-form-field>
-                    <br>
+                    <div class="dense-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Section Name</mat-label>
+                            <input type="text" matInput [(ngModel)]="section.title">
+                        </mat-form-field>
+                    </div>
+
                     <div *ngFor="let qa of section.questions; let inner_i = index;">
                         <div class="qa-wrapper">
                             <div class="left-column">
                                 Question
                             </div>
-                            <mat-form-field appearance="outline" class="right-column">
-                                <input type="text" [(ngModel)]="qa.question" matInput>
-                            </mat-form-field>
+                            <div class="dense-2 right-column">
+                                <mat-form-field appearance="outline">
+                                    <input type="text" [(ngModel)]="qa.question" matInput>
+                                </mat-form-field>
+                            </div>
                         </div>
                         <div class="qa-wrapper">
                             <div class="left-column">
                                 Response
                             </div>
-                            <mat-form-field appearance="outline" class="right-column">
-                                <mat-select [(ngModel)]="qa.answerFormat.type"
-                                    (selectionChange)="handleAnswerType($event.value, outer_i, inner_i)">
-                                    <mat-option [value]="''">Select an answer type</mat-option>
-                                    <mat-option *ngFor="let option of options"
-                                        [value]="option.type">{{option.label}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div *ngIf="qa.answerFormat.type === 'radio'" class="option-wrapper">
-                            <div *ngIf="qa.answerFormat.options?.length">
-                                <span
-                                    *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
-                                    class="option-field-wrapper">
-                                    <input type="text" placeholder="Option" class="option-field"
-                                        [(ngModel)]="qa?.answerFormat?.options![option_i]">
-                                    <span (click)="deleteOption(outer_i, inner_i, option_i)"
-                                        class="option-btn warn-color" matTooltip="Remove Option">x</span>
-                                </span>
-                                <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
-                                    class="option-btn primary-background add-opt-btn">+</span>
+                            <div class="dense-2 right-column">
+                                <mat-form-field appearance="outline">
+                                    <mat-select [(ngModel)]="qa.answerFormat.type"
+                                        (selectionChange)="handleAnswerType($event.value, outer_i, inner_i)">
+                                        <mat-option [value]="''">Select an answer type</mat-option>
+                                        <mat-option *ngFor="let option of options"
+                                            [value]="option.type">{{option.label}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
 
+                                <div *ngIf="qa.answerFormat.type === 'radio'">
+                                    <div *ngIf="qa.answerFormat.options?.length" class="option-wrapper">
+                                        <span
+                                            *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
+                                            class="option-field-wrapper">
+                                            <input type="text" placeholder="Option" class="option-field"
+                                                [(ngModel)]="qa?.answerFormat?.options![option_i]">
+                                            <span (click)="deleteOption(outer_i, inner_i, option_i)"
+                                                class="option-del-btn pointer" matTooltip="Remove Option"
+                                                *ngIf="qa.answerFormat.options!.length>1">
+                                                <mat-icon color="warn">close</mat-icon>
+                                            </span>
+                                        </span>
+                                        <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
+                                            class="pointer option-add-btn" *ngIf="qa.answerFormat.options!.length<10">
+                                            <mat-icon color="primary">add_box</mat-icon>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="qa.answerFormat.type === 'checkbox'">
+                                    <div *ngIf="qa.answerFormat.options?.length" class="option-wrapper">
+                                        <span
+                                            *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
+                                            class="option-field-wrapper">
+                                            <input type="text" placeholder="Option" class="option-field"
+                                                [(ngModel)]="qa?.answerFormat?.options![option_i]">
+                                            <span (click)="deleteOption(outer_i, inner_i, option_i)"
+                                                class="option-del-btn pointer" matTooltip="Remove Option"
+                                                *ngIf="qa.answerFormat.options!.length>1">
+                                                <mat-icon color="warn">close</mat-icon>
+                                            </span>
+                                        </span>
+                                        <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
+                                            class="pointer option-add-btn" *ngIf="qa.answerFormat.options!.length<10">
+                                            <mat-icon color="primary">add_box</mat-icon>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="qa.answerFormat.type === 'checkbox'" class="option-wrapper">
-                            <div *ngIf="qa.answerFormat.options?.length">
-                                <span
-                                    *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
-                                    class="option-field-wrapper">
-                                    <input type="text" placeholder="Option" class="option-field"
-                                        [(ngModel)]="qa?.answerFormat?.options![option_i]">
-                                    <span (click)="deleteOption(outer_i, inner_i, option_i)"
-                                        class="option-btn warn-color" matTooltip="Remove Option">x</span>
-                                </span>
-                            </div>
-                            <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
-                                class="option-btn primary-color">+</span>
                         </div>
                         <div>
                             <mat-checkbox class="float-r" color="primary" value="true"
-                                [(ngModel)]="qa.answerFormat.required">Mark as required</mat-checkbox>
+                                [(ngModel)]="qa.answerFormat.required">
+                                Mark as required
+                            </mat-checkbox>
                             <span class="warn-color remove-question pointer"
                                 (click)="removeQAFromSection(outer_i, inner_i)">
                                 Remove Question -
@@ -115,4 +138,5 @@
             Cancel
         </button>
     </div>
+
 </div>

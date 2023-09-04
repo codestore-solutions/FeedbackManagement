@@ -64,7 +64,7 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
     feedbackType: "",
     sections: [
       {
-        title: `New Section`,
+        title: `New Section 1`,
         order: 1,
         questions: [
           {
@@ -200,8 +200,8 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
             alert(`You must provide options for radio based answer types in section - ${section.title}`)
             return false
           }else{
-            if(qa.answerFormat.options?.length!<2 && qa.answerFormat.options?.length!>10){
-              alert(`Allowed number of options for a radio question type is between 2 and 10 in section - ${section.title}`)
+            if(qa.answerFormat.options?.length!<1 && qa.answerFormat.options?.length!>10){
+              alert(`Allowed number of options for a radio question type is between 1 and 10 in section - ${section.title}`)
               return false
             }
             for(let opt of qa.answerFormat.options!){
@@ -226,8 +226,8 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
             alert(`You must provide options for checkbox based answer types in section - ${section.title}`)
             return false
           }else{
-            if(qa.answerFormat.options?.length!<2 && qa.answerFormat.options?.length!>10){
-              alert(`Allowed number of options for a checkbox question type is between 2 and 10 in section - ${section.title}`)
+            if(qa.answerFormat.options?.length!<1 && qa.answerFormat.options?.length!>10){
+              alert(`Allowed number of options for a checkbox question type is between 1 and 10 in section - ${section.title}`)
               return false
             }
             for(let opt of qa.answerFormat.options!){
