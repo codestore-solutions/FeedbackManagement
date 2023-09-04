@@ -9,7 +9,7 @@ import FeedbackCategory from '../db/models/feedbackCategory';
 import { generateUrlWithToken } from '../utils';
 import { LinkBodyDto } from '../types/feedback';
 import { validateLinkBodySchema } from '../validations/response';
-import { FeedbackLinks } from '../db/models/FeedbackLinks';
+import { FeedbackLinks } from '../db/models/feedbackLinks';
 import * as yup from 'yup';
 
 

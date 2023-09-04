@@ -45,5 +45,9 @@ const FeedbackLinkSchema = new mongoose_1.Schema({
         type: Boolean,
         default: true
     },
+    createdBy: {
+        type: String,
+        required: true
+    },
 }, { timestamps: true, versionKey: false });
 exports.FeedbackLinks = mongoose_1.default.model('FeedbackLinks', FeedbackLinkSchema);
