@@ -149,4 +149,8 @@ router.get(
     getServiceCategories
 );
 
+router.get(
+    "/feedbackLinks/getFeedbackLinks/:businessAdminId"
+);
+
 export default router;

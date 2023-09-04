@@ -44,6 +44,7 @@ const businessAdmin_1 = require("../db/models/businessAdmin");
 const feedbackCategory_1 = __importDefault(require("../db/models/feedbackCategory"));
 const utils_1 = require("../utils");
 const response_1 = require("../validations/response");
+const FeedbackLinks_1 = require("../db/models/FeedbackLinks");
 const yup = __importStar(require("yup"));
 //create response
 const addBusinessAdminAndAllotTemplates = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -107,6 +108,7 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
         }
         const templateObj = (_a = existingTemplate.templates[0]) === null || _a === void 0 ? void 0 : _a.id;
         const link = (0, utils_1.generateUrlWithToken)(templateObj, bodyData);
+        yield saveGeneratedLink(link, bodyData.entityId, bodyData.entityName);
         return (0, responseUtils_1.buildObjectResponse)(res, link);
     }
     catch (error) {
@@ -121,3 +123,13 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getActiveLinkForTemplate = getActiveLinkForTemplate;
+function saveGeneratedLink(url, productId, productName) {
+    return __awaiter(this, void 0, void 0, function* () {
+        FeedbackLinks_1.FeedbackLinks.create({
+            entityId: productId,
+            entityName: productName,
+            feedbackUrl: url,
+            isActive: true
+        });
+    });
+}

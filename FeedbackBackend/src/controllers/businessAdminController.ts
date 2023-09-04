@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import FeedbackTemplate, { AnswerFormat, FeedbackFormat, FeedbackTemplateInterface, QuestionAnswerFormField } from '../db/models/template';
 import { validateFormSchema } from '../validations/template';
 import { TemplateType } from '../constants/constants';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import { buildErrorResponse, buildObjectResponse, buildResponse } from '../utils/responseUtils';
 import { BusinessAdmin } from '../db/models/businessAdmin';
 import FeedbackCategory from '../db/models/feedbackCategory';
 import { generateUrlWithToken } from '../utils';
 import { LinkBodyDto } from '../types/feedback';
 import { validateLinkBodySchema } from '../validations/response';
+import { FeedbackLinks } from '../db/models/FeedbackLinks';
 import * as yup from 'yup';
 
 
@@ -98,6 +99,7 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
         const templateObj = existingTemplate.templates[0]?.id;
 
         const link = generateUrlWithToken(templateObj, bodyData);
+        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName);
 
         return buildObjectResponse(res, link)
 
@@ -110,4 +112,15 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
             return buildErrorResponse(res, 'Internal server error', 500);
         }
     }
+
+}
+async function saveGeneratedLink(url: string, productId: string, productName: string){
+    
+
+    FeedbackLinks.create({
+        entityId: productId,
+        entityName: productName,
+        feedbackUrl: url,
+        isActive: true
+    });
 }

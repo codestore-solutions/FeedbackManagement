@@ -41,10 +41,8 @@ exports.TemplateResponseDTOSchema = yup.object().shape({
 const validateResponseSchema = (data) => exports.TemplateResponseDTOSchema.validate(data);
 exports.validateResponseSchema = validateResponseSchema;
 const linkBodySchema = yup.object().shape({
-    authorId: yup.string().required('Customer ID is required'),
     entityId: yup.string().required('Entity ID is required'),
     entityName: yup.string().required('Entity name is required'),
-    authorName: yup.string().optional(),
 });
 const validateLinkBodySchema = (data) => linkBodySchema.validate(data);
 exports.validateLinkBodySchema = validateLinkBodySchema;
