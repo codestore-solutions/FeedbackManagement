@@ -69,7 +69,7 @@
                                             *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
                                             class="option-field-wrapper">
                                             <input type="text" placeholder="Option" class="option-field"
-                                                [(ngModel)]="qa?.answerFormat?.options![option_i]">
+                                                [(ngModel)]="qa?.answerFormat?.options![option_i]" placeholder="Option {{option_i+1}}">
                                             <span (click)="deleteOption(outer_i, inner_i, option_i)"
                                                 class="option-del-btn pointer" matTooltip="Remove Option"
                                                 *ngIf="qa.answerFormat.options!.length>1">
@@ -89,7 +89,7 @@
                                             *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
                                             class="option-field-wrapper">
                                             <input type="text" placeholder="Option" class="option-field"
-                                                [(ngModel)]="qa?.answerFormat?.options![option_i]">
+                                                [(ngModel)]="qa?.answerFormat?.options![option_i]" placeholder="Option {{option_i+1}}">
                                             <span (click)="deleteOption(outer_i, inner_i, option_i)"
                                                 class="option-del-btn pointer" matTooltip="Remove Option"
                                                 *ngIf="qa.answerFormat.options!.length>1">

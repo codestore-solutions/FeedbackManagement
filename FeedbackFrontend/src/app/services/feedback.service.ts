@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { CustomFeedbackFormBodySchema, SingleFeedbackTemplateBody, CategoryBasedFeedbackTemplatesDetails, BusinessSpecificFeedbackTemplatesDetails, CategoryList, EntitiesAssociatedWithCategory, FeedbacksAssociatedWithEntity, DetailedFeedbackResponse, LinkGenerationPayload, GeneratedLinkResponse} from '../interfaces/feedback';
+import { CustomFeedbackFormBodySchema, SingleFeedbackTemplateBody, CategoryBasedFeedbackTemplatesDetails, BusinessSpecificFeedbackTemplatesDetails, CategoryList, EntitiesAssociatedWithCategory, FeedbacksAssociatedWithEntity, DetailedFeedbackResponse, LinkGenerationPayload, GeneratedLinkResponse, GetAllLinks} from '../interfaces/feedback';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -50,7 +50,11 @@ export class FeedbackService {
 
   //get feedbacks associated with a entity
   getFeedbacksAssociatedWithEntity(entityId:string, pageNumber:number, pageSize:number):Observable<FeedbacksAssociatedWithEntity>{
-    return this._http.get<FeedbacksAssociatedWithEntity>(`${this.baseURL}templateResponse/getResponsesOfEntity/${entityId}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    let pageConfig = new HttpParams()
+    .set('pageNumber', pageNumber)
+    .set('pageSize', pageSize)
+
+    return this._http.get<FeedbacksAssociatedWithEntity>(`${this.baseURL}templateResponse/getResponsesOfEntity/${entityId}`, {params: pageConfig})
   }
 
   //get detailed feedback response for an entity based on response id
@@ -64,8 +68,12 @@ export class FeedbackService {
   }
 
   //gets all the generated feedback links for a particular template id
-  getAllTemplateSpecificGeneratedLinks(){
-    this._http.get(`${this.baseURL}`)
+  getAllGeneratedLinks(businessAdminId:number, pageNumber:number, pageSize:number):Observable<GetAllLinks>{
+    let pageConfig = new HttpParams()
+    .set('pageNumber', pageNumber)
+    .set('pageSize', pageSize)
+
+    return this._http.get<GetAllLinks>(`${this.baseURL}feedbackLinks/getFeedbackLinks/${businessAdminId}`, {params: pageConfig})
   }
   
 }

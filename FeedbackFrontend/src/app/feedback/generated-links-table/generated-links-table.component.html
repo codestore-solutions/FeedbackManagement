@@ -2,12 +2,13 @@
     <div class="heading-wrapper">
         <span class="bold">Generated Feedback Template Links</span>
     </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="!generatedFeedbackLinks"></mat-progress-bar>
     <div class="table-wrapper">
-        <table mat-table [dataSource]="dataSource" class="generated-link-table mat-elevation-z1">
+        <table mat-table [dataSource]="dataSource" class="generated-link-table">
             <ng-container matColumnDef="serial">
                 <th mat-header-cell *matHeaderCellDef>S.No.</th>
                 <td mat-cell *matCellDef="let generatedLink; let i = index;">
-                    {{i+1}}
+                    {{i+1 + pageConfig.pageSize*pageConfig.pageNumber}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="entityId">
@@ -22,35 +23,35 @@
                     {{generatedLink.entityName}}
                 </td>
             </ng-container>
-            <ng-container matColumnDef="link">
+            <ng-container matColumnDef="feedbackUrl">
                 <th mat-header-cell *matHeaderCellDef>Generated Link</th>
                 <td mat-cell *matCellDef="let generatedLink; let i = index;">
                     <div class="link-wrapper">
-                        <span>{{generatedLink.link.slice(0, 15)}}...</span>
-                        <img src="../../../assets/copy-icon.svg" alt="copy" matTooltip="Copy Link" class="copy-img" [cdkCopyToClipboard]="generatedLink.link">
+                        <span>{{generatedLink.feedbackUrl.slice(0, 15)}}...</span>
+                        <img
+                            src="../../../assets/copy-icon.svg"
+                            alt="copy" matTooltip="Copy Link"
+                            class="copy-img"
+                            [cdkCopyToClipboard]="generatedLink.feedbackUrl"
+                            (click)="copyLinkAlert(generatedLink.entityName)"
+                        >
                     </div>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="date">
+            <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef>Created On</th>
                 <td mat-cell *matCellDef="let generatedLink; let i = index;">
-                    {{generatedLink.date}}
+                    {{generatedLink.createdAt | date}}
                 </td>
             </ng-container>
-            <!-- <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef>Action</th>
-                <td mat-cell *matCellDef="let generatedLink; let i = index;">
-                    <div class="action-wrapper">
-                        <img src="../../../assets/delete-red.svg" alt="delete" class="action-img" matTooltip="Delete">
-                    </div>
-                </td>
-            </ng-container> -->
         
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
         </table>
+        <mat-paginator [length]="totalLinks" [pageSize]="pageConfig.pageSize" (page)="handlePageEvent($event)" #paginator>
+        </mat-paginator>
     </div>
-    <div *ngIf="!data">
+    <div *ngIf="generatedFeedbackLinks.response.data.length===0">
         <app-no-data-available></app-no-data-available>
     </div>
 </div>
