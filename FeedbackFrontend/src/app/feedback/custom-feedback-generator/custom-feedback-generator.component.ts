@@ -186,6 +186,10 @@ export class CustomFeedbackGeneratorComponent implements OnInit {
         alert(`Section Names are mandatory fields.`)
         return false
       }
+      if(section.questions.length<1){
+        alert(`You must provide questions in section - ${section.title}`)
+        return false
+      }
       for(let qa of section.questions){
         if(qa.question.trim() === ""){
           alert(`Empty question fields are not allowed in section - ${section.title}`)

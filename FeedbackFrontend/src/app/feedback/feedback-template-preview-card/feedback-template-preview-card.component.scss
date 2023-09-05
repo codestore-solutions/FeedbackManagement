@@ -3,6 +3,7 @@
 }
 .card-container {
   position: relative;
+  margin-inline: 0.75em;
 }
 
 .base {
@@ -10,12 +11,10 @@
   display: block;
   transition: .5s ease;
   backface-visibility: hidden;
-  margin-inline: 0.75em;
   overflow: hidden;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 5px;
   img{
-    object-fit: cover;
+    object-fit: fill;
   }
 }
 

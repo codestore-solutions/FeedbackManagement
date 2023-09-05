@@ -78,7 +78,7 @@
                                         </span>
                                         <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
                                             class="pointer option-add-btn" *ngIf="qa.answerFormat.options!.length<10">
-                                            <mat-icon color="primary">add_box</mat-icon>
+                                            <img src="../../../assets/grey-plus.svg" alt="add">
                                         </span>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                         </span>
                                         <span (click)="addOption(outer_i, inner_i)" matTooltip="Add Option"
                                             class="pointer option-add-btn" *ngIf="qa.answerFormat.options!.length<10">
-                                            <mat-icon color="primary">add_box</mat-icon>
+                                            <img src="../../../assets/grey-plus.svg" alt="add">
                                         </span>
                                     </div>
                                 </div>
@@ -110,7 +110,9 @@
                                 Mark as required
                             </mat-checkbox>
                             <span class="warn-color remove-question pointer"
-                                (click)="removeQAFromSection(outer_i, inner_i)">
+                                (click)="removeQAFromSection(outer_i, inner_i)"
+                                *ngIf="section.questions.length>1"
+                            >
                                 Remove Question -
                             </span>
                         </div>

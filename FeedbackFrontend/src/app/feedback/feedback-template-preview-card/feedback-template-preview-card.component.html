@@ -1,5 +1,6 @@
 <div class="flex-wrapper">
   <div class="card-container" *ngFor="let template of templates; let i = index;">
+    
     <div class="base" [ngClass]="{'active':template.active}">
       <img src="../../../assets/template-preview-bg-1.svg" alt="bg" *ngIf="i%2===0">
       <img src="../../../assets/template-preview-bg-2.svg" alt="bg" *ngIf="i%2!==0">
@@ -11,5 +12,6 @@
         <img src="../../../assets/eye.svg" alt="view">
       </button>
     </div>
+    
   </div>
 </div>
