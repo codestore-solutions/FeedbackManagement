@@ -34,7 +34,7 @@
                     <div class="dense-2">
                         <mat-form-field appearance="outline">
                             <mat-label>Section Name</mat-label>
-                            <input type="text" matInput [(ngModel)]="section.title">
+                            <input type="text" matInput [(ngModel)]="section.title" required="true">
                         </mat-form-field>
                     </div>
 
@@ -45,7 +45,7 @@
                             </div>
                             <div class="dense-2 right-column">
                                 <mat-form-field appearance="outline">
-                                    <input type="text" [(ngModel)]="qa.question" matInput>
+                                    <input type="text" [(ngModel)]="qa.question" matInput required="true">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                             *ngFor="let opt of qa.answerFormat.options; let option_i = index; trackBy: trackByFn;"
                                             class="option-field-wrapper">
                                             <input type="text" placeholder="Option" class="option-field"
-                                                [(ngModel)]="qa?.answerFormat?.options![option_i]" placeholder="Option {{option_i+1}}">
+                                                [(ngModel)]="qa?.answerFormat?.options![option_i]" placeholder="Option {{option_i+1}}" required="true">
                                             <span (click)="deleteOption(outer_i, inner_i, option_i)"
                                                 class="option-del-btn pointer" matTooltip="Remove Option"
                                                 *ngIf="qa.answerFormat.options!.length>1">
