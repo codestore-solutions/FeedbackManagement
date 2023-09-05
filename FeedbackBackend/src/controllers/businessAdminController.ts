@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import FeedbackTemplate, { AnswerFormat, FeedbackFormat, FeedbackTemplateInterface, QuestionAnswerFormField } from '../db/models/template';
 import { validateFormSchema } from '../validations/template';
 import { TemplateType } from '../constants/constants';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import { buildErrorResponse, buildObjectResponse, buildResponse } from '../utils/responseUtils';
 import { BusinessAdmin } from '../db/models/businessAdmin';
 import FeedbackCategory from '../db/models/feedbackCategory';
 import { generateUrlWithToken } from '../utils';
 import { LinkBodyDto } from '../types/feedback';
 import { validateLinkBodySchema } from '../validations/response';
+import { FeedbackLinks } from '../db/models/feedbackLinks';
 import * as yup from 'yup';
 
 
@@ -98,6 +99,7 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
         const templateObj = existingTemplate.templates[0]?.id;
 
         const link = generateUrlWithToken(templateObj, bodyData);
+        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName,businessAdminId);
 
         return buildObjectResponse(res, link)
 
@@ -110,4 +112,53 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
             return buildErrorResponse(res, 'Internal server error', 500);
         }
     }
+
+}
+
+export const getAllFeedbackLinks = async (req: Request, res: Response) => {
+    try{
+        const businessAdminId = req.params.businessAdminId;
+        const { pageNumber, pageSize } = req.query;
+
+        if (!pageNumber || !pageSize || isNaN(Number(pageNumber)) || isNaN(Number(pageSize))) {
+            return buildErrorResponse(res, 'Invalid pagination parameters', 404);
+        }
+
+        const pageNumberVal = Number(pageNumber);
+        const pageSizeNumberVal = Number(pageSize);
+        if (pageNumberVal < 0 || pageSizeNumberVal < 0) {
+            return buildErrorResponse(res, 'Invalid page or pageSize', 404);
+        }
+
+        const totalResponses = await FeedbackLinks.find(
+        {
+            createdBy: businessAdminId
+        }).count()
+
+         // Fetch the responses
+         const response = await FeedbackLinks.find(
+            {createdBy: businessAdminId})
+            .sort({ createdAt: -1 })
+            .skip((pageNumberVal - 1) * pageSizeNumberVal)
+            .limit(pageSizeNumberVal);
+
+        if (!response) {
+            return buildErrorResponse(res, 'Response not found', 404);
+        }
+        return buildObjectResponse(res, { data: response, totalResponses })
+    }
+    catch{
+
+    }
+}
+
+async function saveGeneratedLink(url: string, productId: string, productName: string,bussinessAdminId: string){
+    
+    FeedbackLinks.create({
+        entityId: productId,
+        entityName: productName,
+        feedbackUrl: url,
+        isActive: true,
+        createdBy: bussinessAdminId
+    });
 }
