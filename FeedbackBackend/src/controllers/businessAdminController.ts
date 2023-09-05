@@ -99,7 +99,7 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
         const templateObj = existingTemplate.templates[0]?.id;
 
         const link = generateUrlWithToken(templateObj, bodyData);
-        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName);
+        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName,businessAdminId);
 
         return buildObjectResponse(res, link)
 
@@ -114,13 +114,51 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
     }
 
 }
-async function saveGeneratedLink(url: string, productId: string, productName: string){
-    
 
+export const getAllFeedbackLinks = async (req: Request, res: Response) => {
+    try{
+        const businessAdminId = req.params.businessAdminId;
+        const { pageNumber, pageSize } = req.query;
+
+        if (!pageNumber || !pageSize || isNaN(Number(pageNumber)) || isNaN(Number(pageSize))) {
+            return buildErrorResponse(res, 'Invalid pagination parameters', 404);
+        }
+
+        const pageNumberVal = Number(pageNumber);
+        const pageSizeNumberVal = Number(pageSize);
+        if (pageNumberVal < 0 || pageSizeNumberVal < 0) {
+            return buildErrorResponse(res, 'Invalid page or pageSize', 404);
+        }
+
+        const totalResponses = await FeedbackLinks.find(
+        {
+            createdBy: businessAdminId
+        }).count()
+
+         // Fetch the responses
+         const response = await FeedbackLinks.find(
+            {createdBy: businessAdminId})
+            .sort({ createdAt: -1 })
+            .skip((pageNumberVal - 1) * pageSizeNumberVal)
+            .limit(pageSizeNumberVal);
+
+        if (!response) {
+            return buildErrorResponse(res, 'Response not found', 404);
+        }
+        return buildObjectResponse(res, { data: response, totalResponses })
+    }
+    catch{
+
+    }
+}
+
+async function saveGeneratedLink(url: string, productId: string, productName: string,bussinessAdminId: string){
+    
     FeedbackLinks.create({
         entityId: productId,
         entityName: productName,
         feedbackUrl: url,
-        isActive: true
+        isActive: true,
+        createdBy: bussinessAdminId
     });
 }

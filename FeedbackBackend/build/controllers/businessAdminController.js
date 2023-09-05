@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getActiveLinkForTemplate = exports.addBusinessAdminAndAllotTemplates = void 0;
+exports.getAllFeedbackLinks = exports.getActiveLinkForTemplate = exports.addBusinessAdminAndAllotTemplates = void 0;
 const template_1 = __importDefault(require("../db/models/template"));
 const constants_1 = require("../constants/constants");
 const mongoose_1 = require("mongoose");
@@ -44,7 +44,7 @@ const businessAdmin_1 = require("../db/models/businessAdmin");
 const feedbackCategory_1 = __importDefault(require("../db/models/feedbackCategory"));
 const utils_1 = require("../utils");
 const response_1 = require("../validations/response");
-const FeedbackLinks_1 = require("../db/models/FeedbackLinks");
+const feedbackLinks_1 = require("../db/models/feedbackLinks");
 const yup = __importStar(require("yup"));
 //create response
 const addBusinessAdminAndAllotTemplates = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -108,7 +108,7 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
         }
         const templateObj = (_a = existingTemplate.templates[0]) === null || _a === void 0 ? void 0 : _a.id;
         const link = (0, utils_1.generateUrlWithToken)(templateObj, bodyData);
-        yield saveGeneratedLink(link, bodyData.entityId, bodyData.entityName);
+        yield saveGeneratedLink(link, bodyData.entityId, bodyData.entityName, businessAdminId);
         return (0, responseUtils_1.buildObjectResponse)(res, link);
     }
     catch (error) {
@@ -123,13 +123,43 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getActiveLinkForTemplate = getActiveLinkForTemplate;
-function saveGeneratedLink(url, productId, productName) {
+const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const businessAdminId = req.params.businessAdminId;
+        const { pageNumber, pageSize } = req.query;
+        if (!pageNumber || !pageSize || isNaN(Number(pageNumber)) || isNaN(Number(pageSize))) {
+            return (0, responseUtils_1.buildErrorResponse)(res, 'Invalid pagination parameters', 404);
+        }
+        const pageNumberVal = Number(pageNumber);
+        const pageSizeNumberVal = Number(pageSize);
+        if (pageNumberVal < 0 || pageSizeNumberVal < 0) {
+            return (0, responseUtils_1.buildErrorResponse)(res, 'Invalid page or pageSize', 404);
+        }
+        const totalResponses = yield feedbackLinks_1.FeedbackLinks.find({
+            createdBy: businessAdminId
+        }).count();
+        // Fetch the responses
+        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId })
+            .sort({ createdAt: -1 })
+            .skip((pageNumberVal - 1) * pageSizeNumberVal)
+            .limit(pageSizeNumberVal);
+        if (!response) {
+            return (0, responseUtils_1.buildErrorResponse)(res, 'Response not found', 404);
+        }
+        return (0, responseUtils_1.buildObjectResponse)(res, { data: response, totalResponses });
+    }
+    catch (_c) {
+    }
+});
+exports.getAllFeedbackLinks = getAllFeedbackLinks;
+function saveGeneratedLink(url, productId, productName, bussinessAdminId) {
     return __awaiter(this, void 0, void 0, function* () {
-        FeedbackLinks_1.FeedbackLinks.create({
+        feedbackLinks_1.FeedbackLinks.create({
             entityId: productId,
             entityName: productName,
             feedbackUrl: url,
-            isActive: true
+            isActive: true,
+            createdBy: bussinessAdminId
         });
     });
 }
