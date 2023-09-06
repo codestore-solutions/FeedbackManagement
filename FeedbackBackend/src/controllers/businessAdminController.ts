@@ -69,7 +69,6 @@ export const addBusinessAdminAndAllotTemplates = async (req: Request, res: Respo
     }
 }
 
-
 export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
     try {
         const serviceId = req.params.serviceId;
@@ -99,8 +98,8 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
         const templateObj = existingTemplate.templates[0]?.id;
 
         const response = await FeedbackLinks.findOne(
-            {entityId: bodyData.entityId},
-            {templateId: templateObj}
+            {entityId: bodyData.entityId,
+            templateId: templateObj}
         )
 
         if(response) {
@@ -126,7 +125,6 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
 }
 
 export const getAllFeedbackLinks = async (req: Request, res: Response) => {
-    //need to add template id request params so query can be changed------------------------------
     try{
         const businessAdminId = req.params.businessAdminId;
         const templateId = req.params.templateId;
@@ -149,8 +147,8 @@ export const getAllFeedbackLinks = async (req: Request, res: Response) => {
 
          // Fetch the responses
         const response = await FeedbackLinks.find(
-            {createdBy: businessAdminId},
-            {templateId: templateId}
+            {createdBy: businessAdminId,
+            templateId: templateId}
         )
         .sort({ createdAt: -1 })
         .skip((pageNumberVal - 1) * pageSizeNumberVal)

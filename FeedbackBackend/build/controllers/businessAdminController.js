@@ -107,7 +107,8 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
             return (0, responseUtils_1.buildErrorResponse)(res, 'Template is not active', 404);
         }
         const templateObj = (_a = existingTemplate.templates[0]) === null || _a === void 0 ? void 0 : _a.id;
-        const response = yield feedbackLinks_1.FeedbackLinks.findOne({ entityId: bodyData.entityId }, { templateId: templateObj });
+        const response = yield feedbackLinks_1.FeedbackLinks.findOne({ entityId: bodyData.entityId,
+            templateId: templateObj });
         if (response) {
             return (0, responseUtils_1.buildObjectResponse)(res, response.feedbackUrl);
         }
@@ -129,7 +130,6 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
 });
 exports.getActiveLinkForTemplate = getActiveLinkForTemplate;
 const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //need to add template id request params so query can be changed------------------------------
     try {
         const businessAdminId = req.params.businessAdminId;
         const templateId = req.params.templateId;
@@ -146,7 +146,8 @@ const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, func
             createdBy: businessAdminId
         }).count();
         // Fetch the responses
-        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId }, { templateId: templateId })
+        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId,
+            templateId: templateId })
             .sort({ createdAt: -1 })
             .skip((pageNumberVal - 1) * pageSizeNumberVal)
             .limit(pageSizeNumberVal);
