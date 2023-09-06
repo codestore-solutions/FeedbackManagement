@@ -48,8 +48,12 @@ export class ExpandedTemplateViewComponent implements OnInit {
     })
   }
 
-  openGeneratedLinksDetailDialog():void{
-    this._dialog.open(GeneratedLinksTableComponent);
+  openGeneratedLinksDetailDialog(templateId: string):void{
+    this._dialog.open(GeneratedLinksTableComponent, {
+      data:{
+        templateId: templateId
+      }
+    });
   }
 
 }

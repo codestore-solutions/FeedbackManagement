@@ -59,6 +59,8 @@ export class TemplateLinkGeneratorComponent implements OnInit{
     this._feedbackService.getGeneratedTemplateLink(this.categoryId, this.businessAdminId, payload)
     .subscribe((res)=>{
       this.generatedLink = res.response;
+    }, (err)=>{
+      this._snackbar.open("Enable to generate the link.", "OK", {duration:2500})
     })
   }
 }

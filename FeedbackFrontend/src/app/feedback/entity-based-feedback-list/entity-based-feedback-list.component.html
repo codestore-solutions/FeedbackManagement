@@ -47,8 +47,8 @@
                         </button>
                     </td>
                 </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayFeedbackColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayFeedbackColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayFeedbackColumns" class="table-header"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayFeedbackColumns;" class="table-rows"></tr>
         </table>
         <mat-paginator [length]="totalFeedbacks" [pageSize]="paginationConfig.pageSize" (page)="handlePageEvent($event)" #paginator>
         </mat-paginator>

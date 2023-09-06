@@ -10,8 +10,6 @@
 <div>
     <mat-progress-bar *ngIf="!categorySpecificEntitiesDataSource" mode="indeterminate"></mat-progress-bar>
 
-    <app-no-data-available *ngIf="!categorySpecificEntitiesData?.response?.responseGroups?.length"></app-no-data-available>
-
     <div *ngIf="categorySpecificEntitiesData?.response?.responseGroups?.length">
         <table mat-table [dataSource]="categorySpecificEntitiesDataSource" class="mat-elevation-z2 feedback-table" multiTemplateDataRows>
             <ng-container matColumnDef="index">
@@ -88,10 +86,11 @@
                   </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayEntityColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayEntityColumns;" [class.example-expanded-row]="row.isExpanded === true">
+            <tr mat-header-row *matHeaderRowDef="displayEntityColumns" class="table-header"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayEntityColumns;" [class.example-expanded-row]="row.isExpanded === true" class="table-rows">
             </tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table>
     </div>
+    <app-no-data-available *ngIf="categorySpecificEntitiesData?.response?.responseGroups?.length==0"></app-no-data-available>
 </div>
