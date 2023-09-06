@@ -42,4 +42,4 @@ jobs:
           app-name: 'feedback-form-dev'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_68379200E6944EABBC79547D91AAC377 }}
-          package: ./out # Change to the correct build output directory
+          package:  /feedback-form/ # Change to the correct build output directory
