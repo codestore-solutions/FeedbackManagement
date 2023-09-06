@@ -3,6 +3,7 @@ import mongoose, { Schema, Types } from "mongoose";
 interface FeedbackLinks extends Document {
     entityId: string;
     entityName: string;
+    templateId:string;
     feedbackUrl: string;
     isActive: boolean;
     createdBy: string;
@@ -16,6 +17,11 @@ const FeedbackLinkSchema: Schema = new Schema({
         required: true
     },
     entityName: {
+        type: String,
+        default: "",
+        required: true
+    },
+    templateId: {
         type: String,
         default: "",
         required: true

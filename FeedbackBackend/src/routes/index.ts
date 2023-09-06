@@ -150,7 +150,7 @@ router.get(
 );
 
 router.get(
-    "/feedbackLinks/getFeedbackLinks/:businessAdminId",
+    "/feedbackLinks/getFeedbackLinks/:businessAdminId/:templateId",
     verifyToken,
     getAllFeedbackLinks
 );

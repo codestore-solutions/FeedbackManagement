@@ -21,9 +21,9 @@ paths:
           description: Template alloted successfully
         '400':
           description: Invalid request body
-  /api/v1//feedbackLinks/getFeedbackLinks/{businessAdminId}:
+  /api/v1//feedbackLinks/getFeedbackLinks/{businessAdminId}/{templateId}:
     get:
-      summary: Fetches all the generated links based on businessAdminId
+      summary: Fetches all the generated links based on businessAdminId and templateId
       tags:
         - Business Admin
       parameters:
@@ -34,6 +34,13 @@ paths:
             type: integer
             example: 2
           description: ID of the business admin
+        - in: path
+          name: templateId
+          required: true
+          schema:
+            type: string
+            example: "64b14fe38d75d76fd1af82c1"
+          description: ID of the template to which the links are related
         - in: query
           name: pageNumber
           required: true
@@ -47,11 +54,11 @@ paths:
       security:
         - JWTAuth: []
       responses:
-        200:
+        '200':
           description: Success
-        404:
+        '404':
           description: Response not found
-        500:
+        '500':
           description: Internal server error
   /api/v1/businessAdmin/createLink/{serviceId}/{businessAdminId}:
     post:
