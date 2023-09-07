@@ -142,14 +142,16 @@ export const getAllFeedbackLinks = async (req: Request, res: Response) => {
 
         const totalResponses = await FeedbackLinks.find(
         {
-            createdBy: businessAdminId
+            createdBy: businessAdminId,
+            templateId:templateId
         }).count()
 
          // Fetch the responses
         const response = await FeedbackLinks.find(
-            {createdBy: businessAdminId,
-            templateId: templateId}
-        )
+        {
+            createdBy: businessAdminId,
+            templateId: templateId
+        })
         .sort({ createdAt: -1 })
         .skip((pageNumberVal - 1) * pageSizeNumberVal)
         .limit(pageSizeNumberVal);
