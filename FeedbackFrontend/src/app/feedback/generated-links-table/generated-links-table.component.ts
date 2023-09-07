@@ -34,7 +34,7 @@ export class GeneratedLinksTableComponent implements OnInit{
   columnsToDisplay:string[] = ["serial", "entityId", "entityName", "feedbackUrl", "createdAt"];
   pageConfig:{pageNumber:number; pageSize:number;} = {
     pageNumber: 0,
-    pageSize: 10
+    pageSize: 5
   }
   @ViewChild('paginator') paginator!: MatPaginator;
 
