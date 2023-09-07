@@ -92,5 +92,5 @@
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table>
     </div>
-    <app-no-data-available *ngIf="categorySpecificEntitiesData?.response?.responseGroups?.length==0"></app-no-data-available>
+    <app-no-data-available [message]="'No data found for the specific category'" *ngIf="categorySpecificEntitiesData?.response?.responseGroups?.length==0"></app-no-data-available>
 </div>

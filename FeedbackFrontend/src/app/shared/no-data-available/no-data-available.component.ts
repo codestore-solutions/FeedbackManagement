@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-no-data-available',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./no-data-available.component.scss']
 })
 export class NoDataAvailableComponent {
-
+  @Input() message:string = "";
 }
