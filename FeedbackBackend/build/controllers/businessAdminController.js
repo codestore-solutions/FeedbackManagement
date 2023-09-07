@@ -143,11 +143,14 @@ const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, func
             return (0, responseUtils_1.buildErrorResponse)(res, 'Invalid page or pageSize', 404);
         }
         const totalResponses = yield feedbackLinks_1.FeedbackLinks.find({
-            createdBy: businessAdminId
+            createdBy: businessAdminId,
+            templateId: templateId
         }).count();
         // Fetch the responses
-        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId,
-            templateId: templateId })
+        const response = yield feedbackLinks_1.FeedbackLinks.find({
+            createdBy: businessAdminId,
+            templateId: templateId
+        })
             .sort({ createdAt: -1 })
             .skip((pageNumberVal - 1) * pageSizeNumberVal)
             .limit(pageSizeNumberVal);
