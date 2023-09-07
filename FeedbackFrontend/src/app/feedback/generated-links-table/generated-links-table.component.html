@@ -4,7 +4,7 @@
     </div>
     <mat-progress-bar mode="indeterminate" *ngIf="!generatedFeedbackLinks"></mat-progress-bar>
     <div class="table-wrapper">
-        <table mat-table [dataSource]="dataSource" class="generated-link-table">
+        <table mat-table [dataSource]="dataSource" class="generated-link-table mat-elevation-z1">
             <ng-container matColumnDef="serial">
                 <th mat-header-cell *matHeaderCellDef>S.No.</th>
                 <td mat-cell *matCellDef="let generatedLink; let i = index;">
@@ -27,7 +27,7 @@
                 <th mat-header-cell *matHeaderCellDef>Generated Link</th>
                 <td mat-cell *matCellDef="let generatedLink; let i = index;">
                     <div class="link-wrapper">
-                        <span>{{generatedLink.feedbackUrl.slice(0, 15)}}...</span>
+                        <span style="color:#3366CC;">{{generatedLink.feedbackUrl.slice(0, 30)}}...</span>
                         <img
                             src="../../../assets/copy-icon.svg"
                             alt="copy" matTooltip="Copy Link"
@@ -51,7 +51,7 @@
         <mat-paginator [length]="totalLinks" [pageSize]="pageConfig.pageSize" (page)="handlePageEvent($event)" #paginator>
         </mat-paginator>
     </div>
-    <div *ngIf="generatedFeedbackLinks.response.data.length===0">
+    <div *ngIf="generatedFeedbackLinks?.response?.data?.length===0">
         <app-no-data-available></app-no-data-available>
     </div>
 </div>

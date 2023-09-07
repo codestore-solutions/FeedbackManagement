@@ -1,16 +1,23 @@
 .heading-wrapper{
     text-align: center;
+    // padding-left: 0.5em;
     font-size: 1.25em;
     padding-block: 0.5em;
 }
 .table-wrapper{
     max-height: 70vh;
+    padding: 0 0.5em;
 }
 .generated-link-table{
     font-size: 0.9em;
+    overflow: hidden;
+    border-radius: 20px;
 }
 th {
     background-color: #F1F3F6 !important;
+}
+td{
+    color: rgb(30, 30, 30) !important;
 }
 .link-wrapper{
     display: flex;
@@ -33,9 +40,12 @@ mat-paginator{
     margin-block: 5px;
     background-color: transparent;
 }
-.table-rows{
-    height: 2.5em;
-}
-.table-header{
-    height: 3em;
-}
+// .table-rows{
+//     height: 2.5em;
+// }
+// .table-header{
+//     height: 3em;
+// }
+.mat-dialog-container {
+    border-radius: 20px !important;
+  }
