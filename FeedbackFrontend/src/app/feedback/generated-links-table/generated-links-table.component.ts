@@ -24,7 +24,7 @@ export class GeneratedLinksTableComponent implements OnInit{
     _id:string;
     entityId:string;
     entityName:string;
-    // templateId:string;
+    templateId:string;
     feedbackUrl:string;
     isActive:boolean;
     createdBy:string;
@@ -51,7 +51,7 @@ export class GeneratedLinksTableComponent implements OnInit{
   }
 
   getGeneratedLinks():void{
-    this._feedbackService.getAllGeneratedLinks(this.businessAdminId, this.pageConfig.pageNumber+1, this.pageConfig.pageSize).subscribe((res)=>{
+    this._feedbackService.getAllGeneratedLinks(this.businessAdminId, this.data.templateId, this.pageConfig.pageNumber+1, this.pageConfig.pageSize).subscribe((res)=>{
       this.generatedFeedbackLinks = res;
       this.dataSource = new MatTableDataSource(this.generatedFeedbackLinks.response.data);
       this.totalLinks = this.generatedFeedbackLinks.response.totalResponses;

@@ -159,7 +159,7 @@ export interface GetAllLinks{
       _id:string;
       entityId:string;
       entityName:string;
-      // templateId:string;
+      templateId:string;
       feedbackUrl:string;
       isActive:boolean;
       createdBy:string;

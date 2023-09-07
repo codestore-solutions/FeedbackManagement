@@ -68,12 +68,12 @@ export class FeedbackService {
   }
 
   //gets all the generated feedback links for a particular template id
-  getAllGeneratedLinks(businessAdminId:number, pageNumber:number, pageSize:number):Observable<GetAllLinks>{
+  getAllGeneratedLinks(businessAdminId:number, templateId:string, pageNumber:number, pageSize:number):Observable<GetAllLinks>{
     let pageConfig = new HttpParams()
     .set('pageNumber', pageNumber)
     .set('pageSize', pageSize)
 
-    return this._http.get<GetAllLinks>(`${this.baseURL}feedbackLinks/getFeedbackLinks/${businessAdminId}`, {params: pageConfig})
+    return this._http.get<GetAllLinks>(`${this.baseURL}feedbackLinks/getFeedbackLinks/${businessAdminId}/${templateId}`, {params: pageConfig})
   }
   
 }
