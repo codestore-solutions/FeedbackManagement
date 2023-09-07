@@ -36,6 +36,11 @@ const FeedbackLinkSchema = new mongoose_1.Schema({
         default: "",
         required: true
     },
+    templateId: {
+        type: String,
+        default: "",
+        required: true
+    },
     feedbackUrl: {
         type: String,
         default: "",

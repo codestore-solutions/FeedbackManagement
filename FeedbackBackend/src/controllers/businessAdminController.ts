@@ -69,7 +69,6 @@ export const addBusinessAdminAndAllotTemplates = async (req: Request, res: Respo
     }
 }
 
-
 export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
     try {
         const serviceId = req.params.serviceId;
@@ -98,8 +97,18 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
 
         const templateObj = existingTemplate.templates[0]?.id;
 
+        const response = await FeedbackLinks.findOne(
+            {entityId: bodyData.entityId,
+            templateId: templateObj}
+        )
+
+        if(response) {
+            return buildObjectResponse(res, response.feedbackUrl)
+        }
+
         const link = generateUrlWithToken(templateObj, bodyData);
-        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName,businessAdminId);
+        //add template link
+        await saveGeneratedLink(link,bodyData.entityId,bodyData.entityName,businessAdminId, templateObj);
 
         return buildObjectResponse(res, link)
 
@@ -118,6 +127,7 @@ export const getActiveLinkForTemplate = async (req: Request, res: Response) => {
 export const getAllFeedbackLinks = async (req: Request, res: Response) => {
     try{
         const businessAdminId = req.params.businessAdminId;
+        const templateId = req.params.templateId;
         const { pageNumber, pageSize } = req.query;
 
         if (!pageNumber || !pageSize || isNaN(Number(pageNumber)) || isNaN(Number(pageSize))) {
@@ -136,11 +146,13 @@ export const getAllFeedbackLinks = async (req: Request, res: Response) => {
         }).count()
 
          // Fetch the responses
-         const response = await FeedbackLinks.find(
-            {createdBy: businessAdminId})
-            .sort({ createdAt: -1 })
-            .skip((pageNumberVal - 1) * pageSizeNumberVal)
-            .limit(pageSizeNumberVal);
+        const response = await FeedbackLinks.find(
+            {createdBy: businessAdminId,
+            templateId: templateId}
+        )
+        .sort({ createdAt: -1 })
+        .skip((pageNumberVal - 1) * pageSizeNumberVal)
+        .limit(pageSizeNumberVal);
 
         if (!response) {
             return buildErrorResponse(res, 'Response not found', 404);
@@ -152,11 +164,13 @@ export const getAllFeedbackLinks = async (req: Request, res: Response) => {
     }
 }
 
-async function saveGeneratedLink(url: string, productId: string, productName: string,bussinessAdminId: string){
+
+async function saveGeneratedLink(url: string, productId: string, productName: string,bussinessAdminId: string, templateId:string){
     
     FeedbackLinks.create({
         entityId: productId,
         entityName: productName,
+        templateId: templateId,
         feedbackUrl: url,
         isActive: true,
         createdBy: bussinessAdminId

@@ -66,5 +66,5 @@ router.post("/templateResponse/uploadImages", fileHandler_1.upload.single('file'
 router.post("/businessAdmin/allotDefaultTemplatesToBusinessAdmin", authentication_1.verifyToken, businessAdminController_1.addBusinessAdminAndAllotTemplates);
 router.post("/businessAdmin/createLink/:serviceId/:businessAdminId", authentication_1.verifyToken, businessAdminController_1.getActiveLinkForTemplate);
 router.get("/serviceCategories/getServices/:businessCategoryId", authentication_1.verifyToken, serviceCategoryController_1.getServiceCategories);
-router.get("/feedbackLinks/getFeedbackLinks/:businessAdminId");
+router.get("/feedbackLinks/getFeedbackLinks/:businessAdminId/:templateId", authentication_1.verifyToken, businessAdminController_1.getAllFeedbackLinks);
 exports.default = router;

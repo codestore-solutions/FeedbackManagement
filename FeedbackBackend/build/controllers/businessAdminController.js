@@ -107,8 +107,14 @@ const getActiveLinkForTemplate = (req, res) => __awaiter(void 0, void 0, void 0,
             return (0, responseUtils_1.buildErrorResponse)(res, 'Template is not active', 404);
         }
         const templateObj = (_a = existingTemplate.templates[0]) === null || _a === void 0 ? void 0 : _a.id;
+        const response = yield feedbackLinks_1.FeedbackLinks.findOne({ entityId: bodyData.entityId,
+            templateId: templateObj });
+        if (response) {
+            return (0, responseUtils_1.buildObjectResponse)(res, response.feedbackUrl);
+        }
         const link = (0, utils_1.generateUrlWithToken)(templateObj, bodyData);
-        yield saveGeneratedLink(link, bodyData.entityId, bodyData.entityName, businessAdminId);
+        //add template link
+        yield saveGeneratedLink(link, bodyData.entityId, bodyData.entityName, businessAdminId, templateObj);
         return (0, responseUtils_1.buildObjectResponse)(res, link);
     }
     catch (error) {
@@ -126,6 +132,7 @@ exports.getActiveLinkForTemplate = getActiveLinkForTemplate;
 const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const businessAdminId = req.params.businessAdminId;
+        const templateId = req.params.templateId;
         const { pageNumber, pageSize } = req.query;
         if (!pageNumber || !pageSize || isNaN(Number(pageNumber)) || isNaN(Number(pageSize))) {
             return (0, responseUtils_1.buildErrorResponse)(res, 'Invalid pagination parameters', 404);
@@ -139,7 +146,8 @@ const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, func
             createdBy: businessAdminId
         }).count();
         // Fetch the responses
-        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId })
+        const response = yield feedbackLinks_1.FeedbackLinks.find({ createdBy: businessAdminId,
+            templateId: templateId })
             .sort({ createdAt: -1 })
             .skip((pageNumberVal - 1) * pageSizeNumberVal)
             .limit(pageSizeNumberVal);
@@ -152,11 +160,12 @@ const getAllFeedbackLinks = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getAllFeedbackLinks = getAllFeedbackLinks;
-function saveGeneratedLink(url, productId, productName, bussinessAdminId) {
+function saveGeneratedLink(url, productId, productName, bussinessAdminId, templateId) {
     return __awaiter(this, void 0, void 0, function* () {
         feedbackLinks_1.FeedbackLinks.create({
             entityId: productId,
             entityName: productName,
+            templateId: templateId,
             feedbackUrl: url,
             isActive: true,
             createdBy: bussinessAdminId
