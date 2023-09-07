@@ -3,6 +3,7 @@
         <span class="bold">Generated Feedback Template Links</span>
         <img src="../../../assets/cross.svg" alt="close" matTooltip="Close" (click)="closeDialog()">
     </div>
+    <mat-divider></mat-divider>
     <mat-progress-bar mode="indeterminate" *ngIf="!generatedFeedbackLinks"></mat-progress-bar>
     <div class="table-wrapper">
         <table mat-table [dataSource]="dataSource" class="generated-link-table mat-elevation-z1">

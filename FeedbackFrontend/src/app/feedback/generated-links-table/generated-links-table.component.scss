@@ -12,9 +12,10 @@
 }
 
 .table-wrapper {
+    margin-top: 1em;
     max-height: 70vh;
     padding: 0 0.5em;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .generated-link-table {
@@ -53,7 +54,7 @@ td {
 
 mat-paginator {
     width: 100%;
-    margin-block: 5px;
+    margin-block: 1em;
     background-color: transparent;
 }
 
