@@ -50,7 +50,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayFeedbackColumns" class="table-header"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayFeedbackColumns;" class="table-rows"></tr>
         </table>
-        <mat-paginator [length]="totalFeedbacks" [pageSize]="paginationConfig.pageSize" (page)="handlePageEvent($event)" #paginator>
+        <mat-paginator [length]="totalFeedbacks" [pageSize]="paginationConfig.pageSize" [pageSizeOptions]="[25, 50, 75, 100]" (page)="handlePageEvent($event)" #paginator>
         </mat-paginator>
     </div>
 </div>

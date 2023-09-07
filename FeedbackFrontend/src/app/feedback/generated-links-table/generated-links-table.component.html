@@ -1,6 +1,7 @@
 <div class="prompt">
     <div class="heading-wrapper">
         <span class="bold">Generated Feedback Template Links</span>
+        <img src="../../../assets/cross.svg" alt="close" matTooltip="Close" (click)="closeDialog()">
     </div>
     <mat-progress-bar mode="indeterminate" *ngIf="!generatedFeedbackLinks"></mat-progress-bar>
     <div class="table-wrapper">
@@ -48,7 +49,7 @@
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay" class="table-header"></tr>
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" class="table-rows"></tr>
         </table>
-        <mat-paginator [length]="totalLinks" [pageSize]="pageConfig.pageSize" (page)="handlePageEvent($event)" #paginator>
+        <mat-paginator [length]="totalLinks" [pageSize]="pageConfig.pageSize" [pageSizeOptions]="[5, 10, 15, 20]" (page)="handlePageEvent($event)" #paginator>
         </mat-paginator>
     </div>
     <div *ngIf="generatedFeedbackLinks?.response?.data?.length===0">

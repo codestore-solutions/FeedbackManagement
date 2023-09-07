@@ -1,12 +1,18 @@
 .heading-wrapper{
-    text-align: center;
-    // padding-left: 0.5em;
+    padding-left: 0.5em;
     font-size: 1.25em;
     padding-block: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img{
+        margin: 0.5em 1em;
+    }
 }
 .table-wrapper{
     max-height: 70vh;
     padding: 0 0.5em;
+    overflow: scroll;
 }
 .generated-link-table{
     font-size: 0.9em;

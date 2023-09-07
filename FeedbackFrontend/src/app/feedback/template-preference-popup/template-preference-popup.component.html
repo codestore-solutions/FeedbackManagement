@@ -1,6 +1,5 @@
 <mat-card>
   <mat-card-content>
-
     <span class="bold">Select an existing template or Create a new one.</span>
     <div class="mid-section" *ngIf="isFetched">
       <div class="card-container" *ngFor="let temp of categorySpecificTemplates?.response?.templates; let i = index;">
