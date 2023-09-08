@@ -1,5 +1,9 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav opened="true" mode="side" class="sidenav">
+    <mat-sidenav
+        #sidenav
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)"
+        class="sidenav">
         <mat-nav-list>
             <h3 class="white logo">feedback</h3>
             <a mat-list-item routerLink="entity-categories" routerLinkActive="active">
