@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div *ngIf="!isLoaded">
+        <div *ngIf="isLoaded===false">
             <app-no-data-available [message]="'Failed to load the details'"></app-no-data-available>
         </div>
 
