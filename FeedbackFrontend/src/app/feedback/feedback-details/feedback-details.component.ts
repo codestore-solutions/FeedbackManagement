@@ -17,6 +17,7 @@ export class FeedbackDetailsComponent implements OnInit{
   authorName!:string;
   entityName!:string;
   currentIdx:number = 0;
+  isLoaded!:boolean;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -32,6 +33,9 @@ export class FeedbackDetailsComponent implements OnInit{
       this.detailedFeedbackResponse = res;
       this.authorName = this.detailedFeedbackResponse.response.authorName;
       this.entityName = this.detailedFeedbackResponse.response.entityName;
+      this.isLoaded = true;
+    }, (err)=>{
+      this.isLoaded = false;
     })
   }
 

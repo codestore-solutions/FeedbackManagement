@@ -2,16 +2,12 @@
 
 <mat-card>
     <mat-card-content>
-        <div>
-            <mat-progress-bar mode="indeterminate" *ngIf="!detailedFeedbackResponse"></mat-progress-bar>
-        </div>
-
         <div class="detail-element">
             <span>Feedback Response ID:</span>
             &NonBreakingSpace;
             <span class="bold">{{responseId}}</span>
         </div>
-        <div class="wrapper">
+        <div class="wrapper" *ngIf="detailedFeedbackResponse && isLoaded">
             <div class="detail-element">
                 <span>Customer Name:</span>
                 &NonBreakingSpace;
@@ -24,7 +20,7 @@
             </div>
         </div>
 
-        <div class="main-wrapper" *ngIf="detailedFeedbackResponse">
+        <div class="main-wrapper" *ngIf="detailedFeedbackResponse && isLoaded">
             <div class="left-box">
                 <div class="left-box-option" *ngFor="let section of detailedFeedbackResponse?.response?.templateResponse; let left_i = index;" (click)="handleCards(left_i)" [ngClass]="{'selected':left_i===currentIdx}">
                     <span class="bold">{{section.title}}</span>
@@ -77,6 +73,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div *ngIf="!isLoaded">
+            <app-no-data-available [message]="'Failed to load the details'"></app-no-data-available>
         </div>
 
     </mat-card-content>
