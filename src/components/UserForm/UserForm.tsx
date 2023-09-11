@@ -23,6 +23,7 @@ const UserForm: React.FC<UserFormProps> = ({ addUserData, submitHandler }) => {
 
   useEffect(() => {
     const userString = localStorage.getItem("name");
+
     if (userString) {
       try {
         const userObject = JSON.parse(userString);
@@ -39,23 +40,26 @@ const UserForm: React.FC<UserFormProps> = ({ addUserData, submitHandler }) => {
   }, [form, addUserData]);
 
   return (
-   
-      <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item
-          name="name"
-          className="mt-5"
-          label={<span className="no-asterisk-label">Submit Feedback As</span>}
-          colon={false}
-          required
-          rules={[
-            {
-              required: true,
-              message: "Customer name is required.",
-            },
-          ]}
-        >
-          <Input placeholder="Customer Name" disabled={ !isEditable && form.getFieldValue("name") ? true: false} onChange={handleInputChange} />
-        </Form.Item>
+    <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form.Item
+        name="name"
+        className="mt-5"
+        label={<span className="no-asterisk-label">Submit Feedback As</span>}
+        colon={false}
+        required
+        rules={[
+          {
+            required: true,
+            message: "Customer name is required.",
+          },
+        ]}
+      >
+        <Input
+          placeholder="Customer Name"
+          disabled={!isEditable && form.getFieldValue("name") ? true : false}
+          onChange={handleInputChange}
+        />
+      </Form.Item>
       <Form.Item>
         <div className="flex justify-end pt-3">
           <Button
@@ -68,8 +72,7 @@ const UserForm: React.FC<UserFormProps> = ({ addUserData, submitHandler }) => {
           </Button>
         </div>
       </Form.Item>
-      </Form>
-   
+    </Form>
   );
 };
 
