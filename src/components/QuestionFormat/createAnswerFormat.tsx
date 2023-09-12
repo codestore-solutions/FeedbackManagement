@@ -57,7 +57,6 @@ export default function CreateAnswerFormat({
 }) {
   const { type, options, required, upperBound } = answerFormat;
   const error = errors[`${sectionId}_${questionId}`];
-  console.log("ptions", options);
   const onChangeHandler = (value: AnswerTypeInterface) => {
     onChange(sectionId, questionId, type, value);
     setErrors((e) => {

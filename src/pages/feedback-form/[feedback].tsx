@@ -82,7 +82,6 @@ export default function FeedbackForm() {
   const closeModal = () => {
     setIsOpen(false);
   };
-  
 
   // const user = {
   //    name: 'Aman Shah'
@@ -104,7 +103,6 @@ export default function FeedbackForm() {
   };
 
   useEffect(() => {
-  
     handleWindowSizeChange();
   }, []);
 
@@ -136,7 +134,7 @@ export default function FeedbackForm() {
         authorName: userData,
         sectionResponse: data,
       };
-      console.log('body', body)
+      console.log("body", body);
       const response = await fetch(`${urls.get}/${templateId}`, {
         method: "POST",
         headers: {
@@ -171,7 +169,6 @@ export default function FeedbackForm() {
   };
 
   useEffect(() => {
-   
     (async () => {
       if (decodedToken) {
         try {
@@ -230,11 +227,11 @@ export default function FeedbackForm() {
     return true;
   };
 
-  const handleModal = () =>{
+  const handleModal = () => {
     if (!validationHandler()) return;
     if (!decodedToken) return false;
     else openModal();
-  }
+  };
 
   const submitHandler = async () => {
     setLoader(true);
@@ -269,7 +266,7 @@ export default function FeedbackForm() {
       {template && (
         <>
           <p
-            className="text-left font-semibold text-lg mt-4 
+            className="text-left font-semibold px-3 text-gray-950 text-lg mt-4 
                     sm:text-xl mb-4 sm:mb-2 opacity-50"
           >
             {template.templateName}

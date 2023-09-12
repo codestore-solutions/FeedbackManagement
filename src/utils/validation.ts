@@ -26,6 +26,7 @@ export const validateAnswer = (section: any) => {
                     transformedErrors[`${sectionId}_${id}`] = errorMessages.fileRequired;
                      return transformedErrors; 
                 }
+                console.log("answer format", answerFormat)
                 transformedErrors[`${sectionId}_${id}`] = errorMessages.required;
                 return transformedErrors;
             }
