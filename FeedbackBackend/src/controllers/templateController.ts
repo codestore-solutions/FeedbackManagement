@@ -275,16 +275,21 @@ export const getTemplateByFeedbackCategoryId = async (req: Request, res: Respons
         const templates: any = businessAdmin.templates
         const templateServiceCategoryId: any = businessAdmin.templateServiceCategoryId
 
-        const mappedTemplates = templates.map((template: any) => ({
-            id: template.id._id,
-            templateName: template.id.templateName,
-            templateType: template.id.templateType,
-            active: template.active,
-            used: template.used,
-        }));
+        const mappedTemplates = templates.map((template:any) => 
+        {if(template.id != null)
+            {
+                return{
+                    id: template.id?._id,
+                    templateName: template.id?.templateName,
+                    templateType: template.id?.templateType,
+                    active: template.id == null ? null: template.active,
+                    used: template.id == null ? null : template.used,
+                }
+            }
+        });
 
         const response = {
-            templates: mappedTemplates,
+            templates: mappedTemplates.filter((item:any) => item != null),
             feedbackType: {
                 id: feedbackTypeId,
                 name: templateServiceCategoryId.name
