@@ -17,7 +17,7 @@
     </div>
 
     <div>
-      <app-no-data-available [message]="'Failed to load template options'" *ngIf="!isFetched"></app-no-data-available>
+      <app-no-data-available [message]="'Failed to load template options'" *ngIf="isFetched===false"></app-no-data-available>
     </div>
 
     <div class="action-wrapper">
