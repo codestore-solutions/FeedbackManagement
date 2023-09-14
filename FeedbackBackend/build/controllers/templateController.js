@@ -286,15 +286,20 @@ const getTemplateByFeedbackCategoryId = (req, res) => __awaiter(void 0, void 0, 
         }
         const templates = businessAdmin.templates;
         const templateServiceCategoryId = businessAdmin.templateServiceCategoryId;
-        const mappedTemplates = templates.map((template) => ({
-            id: template.id._id,
-            templateName: template.id.templateName,
-            templateType: template.id.templateType,
-            active: template.active,
-            used: template.used,
-        }));
+        const mappedTemplates = templates.map((template) => {
+            var _a, _b, _c;
+            if (template.id != null) {
+                return {
+                    id: (_a = template.id) === null || _a === void 0 ? void 0 : _a._id,
+                    templateName: (_b = template.id) === null || _b === void 0 ? void 0 : _b.templateName,
+                    templateType: (_c = template.id) === null || _c === void 0 ? void 0 : _c.templateType,
+                    active: template.id == null ? null : template.active,
+                    used: template.id == null ? null : template.used,
+                };
+            }
+        });
         const response = {
-            templates: mappedTemplates,
+            templates: mappedTemplates.filter((item) => item != null),
             feedbackType: {
                 id: feedbackTypeId,
                 name: templateServiceCategoryId.name
