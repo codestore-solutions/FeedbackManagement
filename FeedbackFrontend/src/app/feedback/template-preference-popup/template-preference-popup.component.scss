@@ -44,8 +44,11 @@ mat-spinner {
 
 .title-wrapper {
     padding: 0.5em;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
-
 .active {
     border: 3px solid #545BFC;
 }

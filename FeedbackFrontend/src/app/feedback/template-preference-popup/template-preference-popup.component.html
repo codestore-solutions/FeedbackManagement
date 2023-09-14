@@ -9,7 +9,7 @@
         <div class="base">
           <img src="../../../assets/template-preview-bg-1.svg" alt="bg" *ngIf="i%2===0">
           <img src="../../../assets/template-preview-bg-2.svg" alt="bg" *ngIf="i%2!==0">
-          <div class="bold title-wrapper">{{temp.templateName.slice(0, 20)}}...</div>
+          <div class="title-wrapper">{{temp.templateName}}</div>
         </div>
         <div class="middle">
           <button mat-icon-button color="primary" matTooltip="Select" routerLink="admin/dashboard/feedback-templates/custom/{{data.categoryId}}/{{temp.id}}" (click)="close()">
