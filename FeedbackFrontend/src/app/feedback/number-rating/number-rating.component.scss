@@ -1,6 +1,10 @@
 .circle{
-    padding: 0.5em 0.9em;
+    min-width: 2em;
+    min-height: 2em;
     margin: 0.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #F4F4FC;
     border-radius: 50%;
 }
@@ -10,4 +14,5 @@
 }
 .wrapper{
     margin-block: 0.75em;
+    display: flex;
 }

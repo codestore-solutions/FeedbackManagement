@@ -22,6 +22,7 @@ import { FeedbackTextboxComponent } from './feedback-textbox/feedback-textbox.co
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 import { NumberRatingComponent } from './number-rating/number-rating.component';
 import { TemplateLinkGeneratorComponent } from './template-link-generator/template-link-generator.component';
+import { GeneratedLinksTableComponent } from './generated-links-table/generated-links-table.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TemplateLinkGeneratorComponent } from './template-link-generator/templa
     FeedbackTextboxComponent,
     ImageUploaderComponent,
     NumberRatingComponent,
-    TemplateLinkGeneratorComponent
+    TemplateLinkGeneratorComponent,
+    GeneratedLinksTableComponent
   ],
   imports: [
     CommonModule,

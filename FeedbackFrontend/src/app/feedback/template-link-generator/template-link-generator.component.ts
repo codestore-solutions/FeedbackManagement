@@ -22,8 +22,6 @@ export class TemplateLinkGeneratorComponent implements OnInit{
   generatedLink!:string;
 
   templateLinkGeneratorForm = new FormGroup({
-    // authorId: new FormControl("", [Validators.required]),
-    // authorName: new FormControl("", [Validators.required]),
     entityId: new FormControl("", [Validators.required]),
     entityName: new FormControl("", [Validators.required])
   })
@@ -61,6 +59,8 @@ export class TemplateLinkGeneratorComponent implements OnInit{
     this._feedbackService.getGeneratedTemplateLink(this.categoryId, this.businessAdminId, payload)
     .subscribe((res)=>{
       this.generatedLink = res.response;
+    }, (err)=>{
+      this._snackbar.open("Enable to generate the link.", "OK", {duration:2500})
     })
   }
 }

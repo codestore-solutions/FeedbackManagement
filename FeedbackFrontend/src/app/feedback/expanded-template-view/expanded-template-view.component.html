@@ -3,11 +3,11 @@
         {{templateName}}
         <app-active-badge *ngIf="template?.response?.active"></app-active-badge>
     </span>
-    <span *ngIf="!template?.response?.active">
-        <button mat-flat-button color="primary" (click)="openGeneratedLinksDetailDialog()" class="actions">
+    <span>
+        <button mat-flat-button color="primary" (click)="openGeneratedLinksDetailDialog(templateId)" class="actions">
             View generated links
         </button>
-        <button mat-flat-button color="primary" (click)="setCurrentTemplateActive()" class="actions">
+        <button mat-flat-button color="primary" (click)="setCurrentTemplateActive()" class="actions" *ngIf="!template?.response?.active">
             Set as active
         </button>
     </span>

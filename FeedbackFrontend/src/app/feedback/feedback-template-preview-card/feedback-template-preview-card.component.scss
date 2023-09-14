@@ -1,32 +1,29 @@
 .flex-wrapper{
   display: flex;
+  align-items: center;
 }
 .card-container {
   position: relative;
+  width: 17em;
+  margin-inline: 0.75em;
 }
-
 .base {
   opacity: 1;
   display: block;
   transition: .5s ease;
   backface-visibility: hidden;
-  margin-inline: 0.75em;
   overflow: hidden;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 5px;
   img{
-    object-fit: cover;
+    object-fit: fill;
   }
 }
-
 .title-wrapper{
   padding: 0.5em;
 }
-
 .active{
   border: 3px solid #545BFC;
 }
-
 .middle {
   transition: .5s ease;
   opacity: 0;
@@ -37,11 +34,9 @@
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 }
-
 .card-container:hover .base {
   opacity: 0.3;
 }
-
 .card-container:hover .middle {
   opacity: 1;
 }

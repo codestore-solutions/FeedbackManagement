@@ -152,3 +152,21 @@ export interface GeneratedLinkResponse{
   response:string;
   statusCode:number;
 }
+
+export interface GetAllLinks{
+  response:{
+    data:{
+      _id:string;
+      entityId:string;
+      entityName:string;
+      templateId:string;
+      feedbackUrl:string;
+      isActive:boolean;
+      createdBy:string;
+      createdAt:string;
+      updatedAt:string;
+    }[];
+    totalResponses:number;
+  };
+  statusCode:number;
+}

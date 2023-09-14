@@ -14,6 +14,7 @@ export interface CategoryID{
 })
 export class TemplatePreferencePopupComponent implements OnInit{
   categorySpecificTemplates!:CategoryBasedFeedbackTemplatesDetails;
+  isFetched!:boolean;
 
   constructor(
     public dialogRef: MatDialogRef<TemplatePreferencePopupComponent>,
@@ -23,6 +24,9 @@ export class TemplatePreferencePopupComponent implements OnInit{
   ngOnInit(): void {
     this._feedbackService.getCategoryBasedTemplateDetails(this.data.categoryId).subscribe((res)=>{
       this.categorySpecificTemplates = res;
+      this.isFetched = true;
+    }, (err)=>{
+      this.isFetched = false;
     })
   }
 

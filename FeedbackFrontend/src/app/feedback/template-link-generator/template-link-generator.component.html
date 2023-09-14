@@ -34,8 +34,8 @@
             </div>
         </form>
 
-        <div class="link-wrapper" *ngIf="generatedLink">
-            <div>
+        <div *ngIf="generatedLink" class="link-section">
+            <div class="link-wrapper">
                 <input type="text" class="link-holder" [(ngModel)]="generatedLink">
                 <span class="img-wrapper" matTooltip="Copy Link" [cdkCopyToClipboard]="generatedLink" (click)="linkCopiedAlert()">
                     <img src="../../../assets/copy-icon.svg" alt="copy">

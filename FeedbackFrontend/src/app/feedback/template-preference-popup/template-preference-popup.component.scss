@@ -1,24 +1,22 @@
 mat-card {
     width: 60vw;
 }
-
 .action-wrapper {
     text-align: center;
 }
-
 mat-spinner {
     margin-left: auto;
     margin-right: auto;
 }
-
 .mid-section {
     margin-block: 1em;
     display: flex;
-    overflow-x: scroll;
+    overflow: scroll;
+    align-items: center;
 }
-
 .card-container {
     position: relative;
+    width: 17em;
 }
 .base {
     opacity: 1;

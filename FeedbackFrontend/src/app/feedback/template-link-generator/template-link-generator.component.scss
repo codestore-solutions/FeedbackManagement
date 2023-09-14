@@ -1,12 +1,16 @@
-mat-card{
-    width: 40vw;
-}
+// mat-card{
+//     width: 40vw;
+// }
 .header{
     font-size: 1.25em;
 }
-.link-wrapper{
+.link-section{
     padding-top: 1em;
     border-top: 1px solid rgb(200, 200, 200);
+}
+.link-wrapper{
+    display: flex;
+    align-items: center;
 }
 .button-wrapper{
     text-align: center;
@@ -21,15 +25,15 @@ img{
 }
 .img-wrapper{
     padding: 0.2em;
-    background-color: rgb(230, 230, 230);
     border-radius: 0.2em;
+    width: 5%;
 }
 .link-holder{
     height: 2em;
-    width: 90%;
+    width: 95%;
 }
-@media screen and (max-width:850px) {
-    mat-card{
-        width: 100vw;
-    }
-}
+// @media screen and (max-width:850px) {
+//     mat-card{
+//         width: 100vw;
+//     }
+// }

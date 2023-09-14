@@ -1,0 +1,61 @@
+<div class="prompt">
+    <div class="heading-wrapper">
+        <span class="bold">Generated Feedback Template Links</span>
+        <img src="../../../assets/cross.svg" alt="close" matTooltip="Close" (click)="closeDialog()">
+    </div>
+    <mat-divider></mat-divider>
+    <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="generated-link-table mat-elevation-z1">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef>S.No.</th>
+                <td mat-cell *matCellDef="let generatedLink; let i = index;">
+                    {{i+1 + pageConfig.pageSize*pageConfig.pageNumber}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="entityId">
+                <th mat-header-cell *matHeaderCellDef>Entity ID</th>
+                <td mat-cell *matCellDef="let generatedLink; let i = index;">
+                    {{generatedLink.entityId}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="entityName">
+                <th mat-header-cell *matHeaderCellDef>Entity Name</th>
+                <td mat-cell *matCellDef="let generatedLink; let i = index;">
+                    {{generatedLink.entityName}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="feedbackUrl">
+                <th mat-header-cell *matHeaderCellDef>Generated Link</th>
+                <td mat-cell *matCellDef="let generatedLink; let i = index;">
+                    <div class="link-wrapper">
+                        <span style="color:#3366CC;">{{generatedLink.feedbackUrl.slice(0, 40)}}...</span>
+                        <img
+                            src="../../../assets/copy-icon.svg"
+                            alt="copy" matTooltip="Copy Link"
+                            class="copy-img"
+                            [cdkCopyToClipboard]="generatedLink.feedbackUrl"
+                            (click)="copyLinkAlert(generatedLink.entityName)"
+                        >
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef>Created On</th>
+                <td mat-cell *matCellDef="let generatedLink; let i = index;">
+                    {{generatedLink.createdAt | date}}
+                </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true;" class="table-header"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" class="table-rows"></tr>
+        </table>
+    </div>
+    <div *ngIf="!generatedFeedbackLinks">
+        <mat-spinner style="margin-left: auto; margin-right: auto;"></mat-spinner>
+    </div>
+    <div *ngIf="generatedFeedbackLinks?.response?.data?.length===0">
+        <app-no-data-available [message]="'No links available for this template'"></app-no-data-available>
+    </div>
+    <mat-paginator [length]="totalLinks" [pageSize]="pageConfig.pageSize" [pageSizeOptions]="[5, 10, 15, 20]" (page)="handlePageEvent($event)" #paginator>
+    </mat-paginator>
+</div>
