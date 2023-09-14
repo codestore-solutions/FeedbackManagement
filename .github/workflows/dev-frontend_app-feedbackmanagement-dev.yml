@@ -1,12 +1,12 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - app-feedbackmanagement-dev
+name: CI_CD dev-webapp-cs (push)
 
 on:
   push:
     branches:
-      - dev-frontend
+      - dev-webapp-cs
   workflow_dispatch:
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'app-feedbackmanagement-dev'
+          app-name: 'feedback-management-dev'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5A8127D37D58484FA424E0C6E45B8925 }}
           package: .
