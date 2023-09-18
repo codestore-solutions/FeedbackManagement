@@ -1,12 +1,15 @@
 <mat-card>
   <mat-card-content>
     <span class="bold">Select an existing template or Create a new one.</span>
+    <div>
+      <mat-progress-bar mode="indeterminate" *ngIf="isFetched===undefined"></mat-progress-bar>
+    </div>
     <div class="mid-section" *ngIf="isFetched">
       <div class="card-container" *ngFor="let temp of categorySpecificTemplates?.response?.templates; let i = index;">
         <div class="base">
           <img src="../../../assets/template-preview-bg-1.svg" alt="bg" *ngIf="i%2===0">
           <img src="../../../assets/template-preview-bg-2.svg" alt="bg" *ngIf="i%2!==0">
-          <div class="bold title-wrapper">{{temp.templateName}}</div>
+          <div class="title-wrapper">{{temp.templateName}}</div>
         </div>
         <div class="middle">
           <button mat-icon-button color="primary" matTooltip="Select" routerLink="admin/dashboard/feedback-templates/custom/{{data.categoryId}}/{{temp.id}}" (click)="close()">
@@ -17,7 +20,7 @@
     </div>
 
     <div>
-      <app-no-data-available [message]="'Failed to load template options'" *ngIf="!isFetched"></app-no-data-available>
+      <app-no-data-available [message]="'Failed to load template options'" *ngIf="isFetched===false"></app-no-data-available>
     </div>
 
     <div class="action-wrapper">

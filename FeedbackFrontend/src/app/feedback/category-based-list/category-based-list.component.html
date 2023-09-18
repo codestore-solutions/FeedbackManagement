@@ -7,7 +7,7 @@
 
 <mat-progress-bar *ngIf="!selectedCategory" mode="indeterminate"></mat-progress-bar>
 
-<div>
+<div class="table-wrapper">
     <mat-progress-bar *ngIf="!categorySpecificEntitiesDataSource" mode="indeterminate"></mat-progress-bar>
 
     <div *ngIf="categorySpecificEntitiesData?.response?.responseGroups?.length">

@@ -9,7 +9,7 @@ mat-spinner {
     margin-right: auto;
 }
 .mid-section {
-    margin-block: 1em;
+    margin-block: 0.5em;
     display: flex;
     overflow: scroll;
     align-items: center;
@@ -44,8 +44,11 @@ mat-spinner {
 
 .title-wrapper {
     padding: 0.5em;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
-
 .active {
     border: 3px solid #545BFC;
 }

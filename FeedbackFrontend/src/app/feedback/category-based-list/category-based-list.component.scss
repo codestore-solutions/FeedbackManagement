@@ -3,6 +3,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+.table-wrapper{
+    overflow: scroll;
+    padding: 5px;
+}
 
 .category {
     border: 1px solid rgb(200, 200, 200);
@@ -58,4 +62,7 @@ tr.example-detail-row {
 }
 .table-header{
     height: 3.5em;
+}
+::-webkit-scrollbar{
+    display: none;
 }

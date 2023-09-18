@@ -4,14 +4,17 @@
     border-radius: 20px;
     font-size: 0.9em;
 }
-
+.table-wrapper{
+    overflow: scroll;
+    padding: 5px;
+}
 th {
     background-color: #F1F3F6 !important;
 }
 
 mat-paginator{
     width: 100%;
-    margin-block: 5px;
+    // margin-block: 5px;
     background-color: transparent;
 }
 .table-rows{
@@ -19,4 +22,7 @@ mat-paginator{
 }
 .table-header{
     height: 3.5em;
+}
+::-webkit-scrollbar{
+    display: none;
 }
