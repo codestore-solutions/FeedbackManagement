@@ -34,5 +34,5 @@ jobs:
         with:
           app-name: 'feedback-management-dev'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_ef18449259db4e828f93dfa0a3a2ae22 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D63694D74317440C944B975023617114 }}
           package: ./FeedbackFrontend/dist/feedback-frontend # Path to the Angular build output directory
