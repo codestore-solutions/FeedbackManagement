@@ -54,7 +54,6 @@ export default function FileInput({ onChange }: FileInputProps) {
             setUrls(prevUrl);
             onChange(prevUrl);
         }
-
         setFiles(newFileList);
     };
     
@@ -72,7 +71,7 @@ export default function FileInput({ onChange }: FileInputProps) {
         <>
        
             <Upload
-                action="https://feedbackbackend-dev.azurewebsites.net/api/v1/templateResponse/uploadImages"
+                action="https://feedback-dev-service.azurewebsites.net/api/v1/templateResponse/uploadImages"
                 accept='image/jpeg, image/png, image/gif'
                 maxCount={5}
                 listType="picture-card"
